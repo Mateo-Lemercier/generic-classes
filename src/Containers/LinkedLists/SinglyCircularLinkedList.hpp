@@ -98,6 +98,8 @@ SinglyCircularLinkedList<T>::Node::Node( T const& data ) : m_data( data ) {}
 template <typename T>
 SinglyCircularLinkedList<T>::~SinglyCircularLinkedList()
 {
+    if ( m_size == 0 )
+        return;
     Node* pCurrent = m_pTail->m_pNext;
     for ( Node* pNext = pCurrent->m_pNext; pCurrent != m_pTail; pCurrent = pNext, pNext = pNext->m_pNext )
         delete pCurrent;
