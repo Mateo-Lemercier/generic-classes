@@ -195,12 +195,12 @@ void SinglyCircularLinkedList<T>::DeleteFront()
 template <typename T>
 void SinglyCircularLinkedList<T>::DeleteAfter( Node* const pPrevNode )
 {
+    m_size--;
     Node const* const pOldNode = pPrevNode->m_pNext;
     pPrevNode->m_pNext = pOldNode->m_pNext;
     if ( pOldNode == m_pTail )
         m_pTail = pPrevNode;
     delete pOldNode;
-    m_size--;
 }
 
 template <typename T>
