@@ -27,6 +27,22 @@ public:
 protected:
     unsigned int m_size = 0;
     Node* m_pTail = nullptr;
+
+#ifdef _GLIBCXX_OSTREAM
+    friend std::ostream& operator<<( std::ostream& os, SinglyCircularLinkedList const& list )
+    {
+        if ( list.m_size == 0 )
+        {
+            os << "{}";
+            return os;
+        }
+        os << "{ ";
+        for ( Node* pNode = list.m_pTail->m_pNext; pNode != list.m_pTail; pNode = pNode->m_pNext )
+            os << pNode->m_data << ", ";
+        os << list.m_pTail->m_data << " }";
+        return os;
+    }
+#endif
 };
 
 
