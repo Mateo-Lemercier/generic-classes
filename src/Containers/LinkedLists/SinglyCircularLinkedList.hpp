@@ -20,6 +20,10 @@ public:
     [[nodiscard]] Node const* GetHead() const;
     [[nodiscard]] Node const* GetTail() const;
 
+    Node* PushFront( T const& data );
+    Node* PushBack( T const& data );
+    Node* PushAfter( Node* pPrevNode, T const& data );
+
 protected:
     unsigned int m_size = 0;
     Node* m_pTail = nullptr;
@@ -94,6 +98,49 @@ typename SinglyCircularLinkedList<T>::Node const* SinglyCircularLinkedList<T>::G
 
 template <typename T>
 typename SinglyCircularLinkedList<T>::Node const* SinglyCircularLinkedList<T>::GetTail() const { return m_pTail; }
+
+
+
+template <typename T>
+typename SinglyCircularLinkedList<T>::Node* SinglyCircularLinkedList<T>::PushFront( T const& data )
+{
+    m_size++;
+    Node* const pNewNode = new Node( data );
+    if ( m_size == 1 )
+    {
+        m_pTail = pNewNode;
+        return pNewNode;
+    }
+    pNewNode->m_pNext = m_pTail->m_pNext;
+    m_pTail->m_pNext = pNewNode;
+    return pNewNode;
+}
+
+template <typename T>
+typename SinglyCircularLinkedList<T>::Node* SinglyCircularLinkedList<T>::PushBack( T const& data )
+{
+    m_size++;
+    Node* const pNewNode = new Node( data );
+    if ( m_size != 1 )
+    {
+        pNewNode->m_pNext = m_pTail->m_pNext;
+        m_pTail->m_pNext = pNewNode;
+    }
+    m_pTail = pNewNode;
+    return pNewNode;
+}
+
+template <typename T>
+typename SinglyCircularLinkedList<T>::Node* SinglyCircularLinkedList<T>::PushAfter( Node* const pPrevNode, T const& data )
+{
+    m_size++;
+    Node* const pNewNode = new Node( data );
+    pNewNode->m_pNext = pPrevNode->m_pNext;
+    pPrevNode->m_pNext = pNewNode;
+    if ( pPrevNode == m_pTail )
+        m_pTail = pNewNode;
+    return pNewNode;
+}
 
 
 #pragma endregion
