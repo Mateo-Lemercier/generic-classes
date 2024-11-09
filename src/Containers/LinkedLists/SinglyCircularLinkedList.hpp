@@ -10,7 +10,7 @@ public:
     class Node;
 
     SinglyCircularLinkedList() = default;
-    ~SinglyCircularLinkedList() = default;
+    ~SinglyCircularLinkedList();
 
     [[nodiscard]] unsigned int GetSize() const;
     [[nodiscard]] bool IsEmpty() const;
@@ -77,6 +77,17 @@ SinglyCircularLinkedList<T>::Node::Node( T const& data ) : m_data( data ) {}
 
 
 #pragma region List
+
+
+template <typename T>
+SinglyCircularLinkedList<T>::~SinglyCircularLinkedList()
+{
+    Node* pCurrent = m_pTail->m_pNext;
+    for ( Node* pNext = pCurrent->m_pNext; pCurrent != m_pTail; pCurrent = pNext, pNext = pNext->m_pNext )
+        delete pCurrent;
+    delete m_pTail;
+}
+
 
 
 template <typename T>
