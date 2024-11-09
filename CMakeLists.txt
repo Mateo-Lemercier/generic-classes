@@ -4,4 +4,6 @@ project(generic_classes)
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(generic_classes src/main.cpp
-        src/Containers/LinkedLists/SinglyCircularLinkedList.hpp)
+        src/Containers/LinkedLists/SinglyCircularLinkedList.hpp
+        src/Containers/LinkedLists/SinglyCircularLinkedList-tests.cpp
+        src/Containers/LinkedLists/SinglyCircularLinkedList-tests.h)
