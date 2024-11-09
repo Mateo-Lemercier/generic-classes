@@ -24,6 +24,10 @@ public:
     Node* PushBack( T const& data );
     Node* PushAfter( Node* pPrevNode, T const& data );
 
+    void DeleteFront();
+    void DeleteAfter( Node* pPrevNode );
+    void Clear();
+
 protected:
     unsigned int m_size = 0;
     Node* m_pTail = nullptr;
@@ -169,6 +173,45 @@ typename SinglyCircularLinkedList<T>::Node* SinglyCircularLinkedList<T>::PushAft
     if ( pPrevNode == m_pTail )
         m_pTail = pNewNode;
     return pNewNode;
+}
+
+
+
+template <typename T>
+void SinglyCircularLinkedList<T>::DeleteFront()
+{
+    m_size--;
+    if ( m_size == 0 )
+    {
+        delete m_pTail;
+        m_pTail = nullptr;
+        return;
+    }
+    Node const* const pOldHead = m_pTail->m_pNext;
+    m_pTail->m_pNext = pOldHead->m_pNext;
+    delete pOldHead;
+}
+
+template <typename T>
+void SinglyCircularLinkedList<T>::DeleteAfter( Node* const pPrevNode )
+{
+    Node const* const pOldNode = pPrevNode->m_pNext;
+    pPrevNode->m_pNext = pOldNode->m_pNext;
+    if ( pOldNode == m_pTail )
+        m_pTail = pPrevNode;
+    delete pOldNode;
+    m_size--;
+}
+
+template <typename T>
+void SinglyCircularLinkedList<T>::Clear()
+{
+    Node* pCurrent = m_pTail->m_pNext;
+    for ( Node* pNext = pCurrent->m_pNext; pCurrent != m_pTail; pCurrent = pNext, pNext = pNext->m_pNext )
+        delete pCurrent;
+    delete m_pTail;
+    m_pTail = nullptr;
+    m_size = 0;
 }
 
 
