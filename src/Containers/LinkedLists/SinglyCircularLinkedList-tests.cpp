@@ -330,7 +330,8 @@ void SinglyCircularLinkedListTests()
 
 
 
-#undef TITLE_COLOR
-#undef TEXT_COLOR
 #undef RESET_COLOR
+#undef GREEN
+#undef YELLOW
+#undef CYAN
 #undef TITLE
