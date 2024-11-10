@@ -91,6 +91,41 @@ std::ostream& RemoveAfter( std::ostream& os )
 
 
 
+std::ostream& PopFront( std::ostream& os )
+{
+    SinglyCircularLinkedList<int> list;
+    list.PushBack( 1 );
+    list.PushBack( 2 );
+    list.PushBack( 3 );
+    os << ' ' << list;
+    for ( int i = 1; i < 4; i++ )
+    {
+        int const popped = list.PopFront();
+        os << "\n- " << i << ": " << list << " (Popped: " << popped << "), size=" << list.GetSize();
+    }
+    os << RESET_COLOR;
+    return os;
+}
+
+std::ostream& PopAfter( std::ostream& os )
+{
+    SinglyCircularLinkedList<int> list;
+    SinglyCircularLinkedList<int>::Node* const pNode = list.PushBack( 0 );
+    list.PushBack( 1 );
+    list.PushBack( 2 );
+    list.PushBack( 3 );
+    os << ' ' << list;
+    for ( int i = 1; i < 4; i++ )
+    {
+        int const popped = list.PopAfter( pNode );
+        os << "\n- " << i << ": " << list << " (Popped: " << popped << "), size=" << list.GetSize();
+    }
+    os << RESET_COLOR;
+    return os;
+}
+
+
+
 std::ostream& DeleteFront( std::ostream& os )
 {
     SinglyCircularLinkedList<int> list;
@@ -216,19 +251,25 @@ void SinglyCircularLinkedListTests()
 
     RemoveFront( std::cout << TITLE( GREEN, "RemoveFront" ) ) << std::endl;
     RemoveAfter( std::cout << TITLE( GREEN, "RemoveAfter" ) ) << std::endl;
-    std::cout << std::endl;
-
-    DeleteFront( std::cout << TITLE( YELLOW, "DeleteFront" ) ) << std::endl;
-    DeleteAfter( std::cout << TITLE( YELLOW, "DeleteAfter" ) ) << std::endl;
-    Clear( std::cout << TITLE( YELLOW, "Clear" ) ) << std::endl;
-    ClearOneElement( std::cout << TITLE( YELLOW, "ClearOneElement" ) ) << std::endl;
 
     std::cout << std::endl;
 
-    DeepDeleteFront( std::cout << TITLE( CYAN, "DeepDeleteFront" ) ) << std::endl;
-    DeepDeleteAfter( std::cout << TITLE( CYAN, "DeepDeleteAfter" ) ) << std::endl;
-    DeepClear( std::cout << TITLE( CYAN, "DeepClear" ) ) << std::endl;
-    DeepClearOneElement( std::cout << TITLE( CYAN, "DeepClearOneElement" ) ) << std::endl;
+    PopFront( std::cout << TITLE( YELLOW, "PopFront" ) ) << std::endl;
+    PopAfter( std::cout << TITLE( YELLOW, "PopAfter" ) ) << std::endl;
+
+    std::cout << std::endl;
+
+    DeleteFront( std::cout << TITLE( CYAN, "DeleteFront" ) ) << std::endl;
+    DeleteAfter( std::cout << TITLE( CYAN, "DeleteAfter" ) ) << std::endl;
+    Clear( std::cout << TITLE( CYAN, "Clear" ) ) << std::endl;
+    ClearOneElement( std::cout << TITLE( CYAN, "ClearOneElement" ) ) << std::endl;
+
+    std::cout << std::endl;
+
+    DeepDeleteFront( std::cout << TITLE( GREEN, "DeepDeleteFront" ) ) << std::endl;
+    DeepDeleteAfter( std::cout << TITLE( GREEN, "DeepDeleteAfter" ) ) << std::endl;
+    DeepClear( std::cout << TITLE( GREEN, "DeepClear" ) ) << std::endl;
+    DeepClearOneElement( std::cout << TITLE( GREEN, "DeepClearOneElement" ) ) << std::endl;
 }
 
 

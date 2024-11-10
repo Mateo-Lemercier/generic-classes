@@ -27,6 +27,9 @@ public:
     void RemoveFront();
     void RemoveAfter( Node* pPrevNode );
 
+    [[nodiscard]] T PopFront();
+    [[nodiscard]] T PopAfter( Node* pPrevNode );
+
     void DeleteFront();
     void DeleteAfter( Node* pPrevNode );
     void Clear();
@@ -207,6 +210,39 @@ void SinglyCircularLinkedList<T>::RemoveAfter( Node* const pPrevNode )
     if ( pOldNode == m_pTail )
         m_pTail = pPrevNode;
     pOldNode->m_pNext = pOldNode;
+}
+
+
+
+template <typename T>
+T SinglyCircularLinkedList<T>::PopFront()
+{
+    m_size--;
+    if ( m_size == 0 )
+    {
+        T data = m_pTail->m_data;
+        delete m_pTail;
+        m_pTail = nullptr;
+        return data;
+    }
+    Node const* const pOldHead = m_pTail->m_pNext;
+    m_pTail->m_pNext = pOldHead->m_pNext;
+    T data = pOldHead->m_data;
+    delete pOldHead;
+    return data;
+}
+
+template <typename T>
+T SinglyCircularLinkedList<T>::PopAfter( Node* const pPrevNode )
+{
+    m_size--;
+    Node const* const pOldNode = pPrevNode->m_pNext;
+    pPrevNode->m_pNext = pOldNode->m_pNext;
+    if ( pOldNode == m_pTail )
+        m_pTail = pPrevNode;
+    T data = pOldNode->m_data;
+    delete pOldNode;
+    return data;
 }
 
 
