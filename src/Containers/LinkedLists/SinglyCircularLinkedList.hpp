@@ -382,7 +382,6 @@ T SinglyCircularLinkedList<T>::PopFront()
 template <typename T>
 T SinglyCircularLinkedList<T>::PopAfter( Node* const pPrevNode )
 {
-    m_size--;
     Node* const pOldNode = pPrevNode->m_pNext;
     pPrevNode->m_pNext = pOldNode->m_pNext;
     if ( pOldNode == m_pTail )
