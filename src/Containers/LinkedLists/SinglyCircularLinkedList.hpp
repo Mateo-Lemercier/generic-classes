@@ -16,10 +16,10 @@ public:
     [[nodiscard]] unsigned int GetSize() const;
     [[nodiscard]] bool IsEmpty() const;
 
-    [[nodiscard]] Node* GetHead();
-    [[nodiscard]] Node* GetTail();
-    [[nodiscard]] Node const* GetHead() const;
-    [[nodiscard]] Node const* GetTail() const;
+    [[nodiscard]] Node* GetFront();
+    [[nodiscard]] Node* GetBack();
+    [[nodiscard]] Node const* GetFront() const;
+    [[nodiscard]] Node const* GetBack() const;
 
     Node* PushFront( T const& data );
     Node* PushBack( T const& data );
@@ -260,16 +260,16 @@ bool SinglyCircularLinkedList<T>::IsEmpty() const { return m_size == 0; }
 
 
 template <typename T>
-typename SinglyCircularLinkedList<T>::Node* SinglyCircularLinkedList<T>::GetHead() { return m_pTail->m_pNext->m_pNext; }
+typename SinglyCircularLinkedList<T>::Node* SinglyCircularLinkedList<T>::GetFront() { return m_pTail->m_pNext->m_pNext; }
 
 template <typename T>
-typename SinglyCircularLinkedList<T>::Node* SinglyCircularLinkedList<T>::GetTail() { return m_pTail; }
+typename SinglyCircularLinkedList<T>::Node* SinglyCircularLinkedList<T>::GetBack() { return m_pTail; }
 
 template <typename T>
-typename SinglyCircularLinkedList<T>::Node const* SinglyCircularLinkedList<T>::GetHead() const { return m_pTail->m_pNext->m_pNext; }
+typename SinglyCircularLinkedList<T>::Node const* SinglyCircularLinkedList<T>::GetFront() const { return m_pTail->m_pNext->m_pNext; }
 
 template <typename T>
-typename SinglyCircularLinkedList<T>::Node const* SinglyCircularLinkedList<T>::GetTail() const { return m_pTail; }
+typename SinglyCircularLinkedList<T>::Node const* SinglyCircularLinkedList<T>::GetBack() const { return m_pTail; }
 
 
 
