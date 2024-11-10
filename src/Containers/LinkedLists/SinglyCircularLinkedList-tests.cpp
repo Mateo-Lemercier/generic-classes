@@ -291,6 +291,56 @@ std::ostream& DeepClearOneElement( std::ostream& os )
 
 
 
+std::ostream& EqualTo( std::ostream& os )
+{
+    SinglyCircularLinkedList<int> list;
+    list.PushBack( 1 );
+    list.PushBack( 2 );
+    list.PushBack( 3 );
+    SinglyCircularLinkedList<int> list1;
+    list1.PushBack( 1 );
+    list1.PushBack( 2 );
+    list1.PushBack( 3 );
+    SinglyCircularLinkedList<int> list2;
+    list2.PushBack( 3 );
+    list2.PushBack( 2 );
+    list2.PushBack( 1 );
+    SinglyCircularLinkedList<int> list3;
+    list3.PushBack( 1 );
+    list3.PushBack( 2 );
+    os << ' ' << list;
+    os << "\n- " << list1 << ", equal=" << ( list == list1 );
+    os << "\n- " << list2 << ", equal=" << ( list == list2 );
+    os << "\n- " << list3 << ", equal=" << ( list == list3 ) << RESET_COLOR;
+    return os;
+}
+
+std::ostream& DifferentThan( std::ostream& os )
+{
+    SinglyCircularLinkedList<int> list;
+    list.PushBack( 1 );
+    list.PushBack( 2 );
+    list.PushBack( 3 );
+    SinglyCircularLinkedList<int> list1;
+    list1.PushBack( 1 );
+    list1.PushBack( 2 );
+    list1.PushBack( 3 );
+    SinglyCircularLinkedList<int> list2;
+    list2.PushBack( 3 );
+    list2.PushBack( 2 );
+    list2.PushBack( 1 );
+    SinglyCircularLinkedList<int> list3;
+    list3.PushBack( 1 );
+    list3.PushBack( 2 );
+    os << ' ' << list;
+    os << "\n- " << list1 << ", different=" << ( list != list1 );
+    os << "\n- " << list2 << ", different=" << ( list != list2 );
+    os << "\n- " << list3 << ", different=" << ( list != list3 ) << RESET_COLOR;
+    return os;
+}
+
+
+
 void SinglyCircularLinkedListTests()
 {
     PushFront( std::cout << TITLE( CYAN, "PushFront" ) ) << std::endl;
@@ -326,6 +376,11 @@ void SinglyCircularLinkedListTests()
     DeepDeleteAfter( std::cout << TITLE( YELLOW, "DeepDeleteAfter" ) ) << std::endl;
     DeepClear( std::cout << TITLE( YELLOW, "DeepClear" ) ) << std::endl;
     DeepClearOneElement( std::cout << TITLE( YELLOW, "DeepClearOneElement" ) ) << std::endl;
+
+    std::cout << std::endl;
+
+    EqualTo( std::cout << TITLE( CYAN, "EqualTo" ) ) << std::endl;
+    DifferentThan( std::cout << TITLE( CYAN, "DifferentThan" ) ) << std::endl;
 }
 
 

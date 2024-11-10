@@ -43,6 +43,9 @@ public:
     void DeepDeleteAfter( Node* pPrevNode );
     void DeepClear();
 
+    bool operator==( SinglyCircularLinkedList const& other ) const;
+    bool operator!=( SinglyCircularLinkedList const& other ) const;
+
     Iterator begin() const;
     Iterator end() const;
 
@@ -467,6 +470,34 @@ void SinglyCircularLinkedList<T>::DeepClear()
     pEmptyNode->m_pNext = pEmptyNode;
     m_pTail = pEmptyNode;
     m_size = 0;
+}
+
+
+
+template <typename T>
+bool SinglyCircularLinkedList<T>::operator==( SinglyCircularLinkedList const& other ) const
+{
+    if ( m_size != other.m_size )
+        return false;
+    Node* pSelfNode = m_pTail->m_pNext->m_pNext;
+    Node* pOtherNode = other.m_pTail->m_pNext->m_pNext;
+    for (; pSelfNode != m_pTail->m_pNext && pOtherNode != other.m_pTail->m_pNext; pSelfNode = pSelfNode->m_pNext, pOtherNode = pOtherNode->m_pNext )
+        if ( pSelfNode->GetData() != pOtherNode->GetData() )
+            return false;
+    return true;
+}
+
+template <typename T>
+bool SinglyCircularLinkedList<T>::operator!=( SinglyCircularLinkedList const& other ) const
+{
+    if ( m_size != other.m_size )
+        return true;
+    Node* pSelfNode = m_pTail->m_pNext->m_pNext;
+    Node* pOtherNode = other.m_pTail->m_pNext->m_pNext;
+    for (; pSelfNode != m_pTail->m_pNext && pOtherNode != other.m_pTail->m_pNext; pSelfNode = pSelfNode->m_pNext, pOtherNode = pOtherNode->m_pNext )
+        if ( pSelfNode->GetData() != pOtherNode->GetData() )
+            return true;
+    return false;
 }
 
 
