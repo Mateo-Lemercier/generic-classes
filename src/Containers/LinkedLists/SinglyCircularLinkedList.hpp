@@ -29,8 +29,8 @@ public:
     void PushBack( Node* pNode );
     void PushAfter( Node* pPrevNode, Node* pNode );
 
-    void RemoveFront();
-    void RemoveAfter( Node* pPrevNode );
+    Node* RemoveFront();
+    Node* RemoveAfter( Node* pPrevNode );
 
     [[nodiscard]] T PopFront();
     [[nodiscard]] T PopAfter( Node* pPrevNode );
@@ -345,7 +345,7 @@ void SinglyCircularLinkedList<T>::PushAfter( Node* const pPrevNode, Node* const 
 
 
 template <typename T>
-void SinglyCircularLinkedList<T>::RemoveFront()
+typename SinglyCircularLinkedList<T>::Node* SinglyCircularLinkedList<T>::RemoveFront()
 {
     Node* const pEmptyNode = m_pTail->m_pNext;
     Node* const pOldHead = pEmptyNode->m_pNext;
@@ -353,10 +353,11 @@ void SinglyCircularLinkedList<T>::RemoveFront()
     if ( m_size == 1 ) { m_pTail = pEmptyNode; }
     m_size--;
     pOldHead->m_pNext = pOldHead;
+    return pOldHead;
 }
 
 template <typename T>
-void SinglyCircularLinkedList<T>::RemoveAfter( Node* const pPrevNode )
+typename SinglyCircularLinkedList<T>::Node* SinglyCircularLinkedList<T>::RemoveAfter( Node* const pPrevNode )
 {
     Node* const pOldNode = pPrevNode->m_pNext;
     pPrevNode->m_pNext = pOldNode->m_pNext;
@@ -364,6 +365,7 @@ void SinglyCircularLinkedList<T>::RemoveAfter( Node* const pPrevNode )
         m_pTail = pPrevNode;
     m_size--;
     pOldNode->m_pNext = pOldNode;
+    return pOldNode;
 }
 
 
