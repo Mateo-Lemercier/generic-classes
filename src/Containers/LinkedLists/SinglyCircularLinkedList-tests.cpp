@@ -112,7 +112,7 @@ std::ostream& RemoveFront( std::ostream& os )
     os << ' ' << list;
     for ( int i = 1; i < 4; i++ )
     {
-        SinglyCircularLinkedList<int>::Node const* const pNode = list.GetHead();
+        SinglyCircularLinkedList<int>::Node const* const pNode = list.GetFront();
         list.RemoveFront();
         os << "\n- " << i << ": " << list << ", size=" << list.GetSize();
         delete pNode;
