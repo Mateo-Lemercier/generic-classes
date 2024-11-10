@@ -8,6 +8,7 @@ class SinglyCircularLinkedList
 {
 public:
     class Node;
+    class Iterator;
 
     SinglyCircularLinkedList() = default;
     ~SinglyCircularLinkedList();
@@ -41,6 +42,9 @@ public:
     void DeepDeleteFront();
     void DeepDeleteAfter( Node* pPrevNode );
     void DeepClear();
+
+    Iterator begin() const;
+    Iterator end() const;
 
 protected:
     class DataNode;
@@ -85,6 +89,7 @@ protected:
 
     Node* m_pNext = this;
 
+    friend class Iterator;
     friend class SinglyCircularLinkedList;
 };
 
@@ -103,6 +108,33 @@ protected:
     explicit DataNode( T const& data );
 
     T m_data;
+
+    friend class Iterator;
+    friend class SinglyCircularLinkedList;
+};
+
+
+
+template <typename T>
+class SinglyCircularLinkedList<T>::Iterator
+{
+public:
+    Iterator& operator++();
+    void operator++( int );
+
+    [[nodiscard]] bool operator==( Iterator const& other ) const;
+    [[nodiscard]] bool operator!=( Iterator const& other ) const;
+
+    [[nodiscard]] T& operator*();
+    [[nodiscard]] T const& operator*() const;
+
+    [[nodiscard]] Node* GetNode();
+    [[nodiscard]] Node const* GetNode() const;
+
+protected:
+    explicit Iterator( Node* pNode );
+
+    Node* m_pNode;
 
     friend class SinglyCircularLinkedList;
 };
@@ -150,6 +182,53 @@ T const& SinglyCircularLinkedList<T>::DataNode::GetData() const { return m_data;
 
 template <typename T>
 SinglyCircularLinkedList<T>::DataNode::DataNode( T const& data ) : m_data( data ) {}
+
+
+#pragma endregion
+
+
+
+#pragma region Iterator
+
+
+template <typename T>
+typename SinglyCircularLinkedList<T>::Iterator& SinglyCircularLinkedList<T>::Iterator::operator++()
+{
+    m_pNode = m_pNode->m_pNext;
+    return *this;
+}
+
+template <typename T>
+void SinglyCircularLinkedList<T>::Iterator::operator++( int ) { m_pNode = m_pNode->m_pNext; }
+
+
+
+template <typename T>
+bool SinglyCircularLinkedList<T>::Iterator::operator==( Iterator const& other ) const { return m_pNode == other.m_pNode; }
+
+template <typename T>
+bool SinglyCircularLinkedList<T>::Iterator::operator!=( Iterator const& other ) const { return m_pNode != other.m_pNode; }
+
+
+
+template <typename T>
+T& SinglyCircularLinkedList<T>::Iterator::operator*() { return m_pNode->GetData(); }
+
+template <typename T>
+T const& SinglyCircularLinkedList<T>::Iterator::operator*() const { return m_pNode->GetData(); }
+
+
+
+template <typename T>
+typename SinglyCircularLinkedList<T>::Node* SinglyCircularLinkedList<T>::Iterator::GetNode() { return m_pNode; }
+
+template <typename T>
+typename SinglyCircularLinkedList<T>::Node const* SinglyCircularLinkedList<T>::Iterator::GetNode() const { return m_pNode; }
+
+
+
+template <typename T>
+SinglyCircularLinkedList<T>::Iterator::Iterator( Node* const pNode ) : m_pNode( pNode ) {}
 
 
 #pragma endregion
@@ -390,6 +469,14 @@ void SinglyCircularLinkedList<T>::DeepClear()
     m_pTail = pEmptyNode;
     m_size = 0;
 }
+
+
+
+template <typename T>
+typename SinglyCircularLinkedList<T>::Iterator SinglyCircularLinkedList<T>::begin() const { return Iterator( m_pTail->m_pNext->m_pNext ); }
+
+template <typename T>
+typename SinglyCircularLinkedList<T>::Iterator SinglyCircularLinkedList<T>::end() const { return Iterator( m_pTail->m_pNext ); }
 
 
 #pragma endregion
