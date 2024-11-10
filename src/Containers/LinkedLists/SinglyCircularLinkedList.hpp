@@ -28,6 +28,10 @@ public:
     void DeleteAfter( Node* pPrevNode );
     void Clear();
 
+    void DeepDeleteFront();
+    void DeepDeleteAfter( Node* pPrevNode );
+    void DeepClear();
+
 protected:
     unsigned int m_size = 0;
     Node* m_pTail = nullptr;
@@ -209,6 +213,52 @@ void SinglyCircularLinkedList<T>::Clear()
     Node* pCurrent = m_pTail->m_pNext;
     for ( Node* pNext = pCurrent->m_pNext; pCurrent != m_pTail; pCurrent = pNext, pNext = pNext->m_pNext )
         delete pCurrent;
+    delete m_pTail;
+    m_pTail = nullptr;
+    m_size = 0;
+}
+
+
+
+template <typename T>
+void SinglyCircularLinkedList<T>::DeepDeleteFront()
+{
+    m_size--;
+    if ( m_size == 0 )
+    {
+        delete m_pTail->m_data;
+        delete m_pTail;
+        m_pTail = nullptr;
+        return;
+    }
+    Node const* const pOldHead = m_pTail->m_pNext;
+    m_pTail->m_pNext = pOldHead->m_pNext;
+    delete pOldHead->m_data;
+    delete pOldHead;
+}
+
+template <typename T>
+void SinglyCircularLinkedList<T>::DeepDeleteAfter( Node* const pPrevNode )
+{
+    m_size--;
+    Node const* const pOldNode = pPrevNode->m_pNext;
+    pPrevNode->m_pNext = pOldNode->m_pNext;
+    if ( pOldNode == m_pTail )
+        m_pTail = pPrevNode;
+    delete pOldNode->m_data;
+    delete pOldNode;
+}
+
+template <typename T>
+void SinglyCircularLinkedList<T>::DeepClear()
+{
+    Node* pCurrent = m_pTail->m_pNext;
+    for ( Node* pNext = pCurrent->m_pNext; pCurrent != m_pTail; pCurrent = pNext, pNext = pNext->m_pNext )
+    {
+        delete pCurrent->m_data;
+        delete pCurrent;
+    }
+    delete m_pTail->m_data;
     delete m_pTail;
     m_pTail = nullptr;
     m_size = 0;
