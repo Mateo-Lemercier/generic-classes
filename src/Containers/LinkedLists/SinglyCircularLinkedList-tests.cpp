@@ -52,6 +52,57 @@ std::ostream& PushAfter( std::ostream& os )
 
 
 
+std::ostream& PushNodeFront( std::ostream& os )
+{
+    SinglyCircularLinkedList<int> list;
+    SinglyCircularLinkedList<int>::Node* const pNodes[3] = { list.PushBack( 1 ), list.PushBack( 2 ), list.PushBack( 3 ) };
+    for ( int i = 0; i < 3; i++ )
+        list.RemoveFront();
+    os << ' ' << list;
+    for ( int i = 0; i < 3; i++ )
+    {
+        list.PushFront( pNodes[i] );
+        os << "\n- " << i+1 << ": " << list << ", size=" << list.GetSize();
+    }
+    os << RESET_COLOR;
+    return os;
+}
+
+std::ostream& PushNodeBack( std::ostream& os )
+{
+    SinglyCircularLinkedList<int> list;
+    SinglyCircularLinkedList<int>::Node* const pNodes[3] = { list.PushBack( 1 ), list.PushBack( 2 ), list.PushBack( 3 ) };
+    for ( int i = 0; i < 3; i++ )
+        list.RemoveFront();
+    os << ' ' << list;
+    for ( int i = 0; i < 3; i++ )
+    {
+        list.PushBack( pNodes[i] );
+        os << "\n- " << i+1 << ": " << list << ", size=" << list.GetSize();
+    }
+    os << RESET_COLOR;
+    return os;
+}
+
+std::ostream& PushNodeAfter( std::ostream& os )
+{
+    SinglyCircularLinkedList<int> list;
+    SinglyCircularLinkedList<int>::Node* const pNode = list.PushBack( 0 );
+    SinglyCircularLinkedList<int>::Node* const pNodes[3] = { list.PushBack( 1 ), list.PushBack( 2 ), list.PushBack( 3 ) };
+    for ( int i = 0; i < 3; i++ )
+        list.RemoveAfter( pNode );
+    os << ' ' << list;
+    for ( int i = 0; i < 3; i++ )
+    {
+        list.PushAfter( pNode, pNodes[i] );
+        os << "\n- " << i+1 << ": " << list << ", size=" << list.GetSize();
+    }
+    os << RESET_COLOR;
+    return os;
+}
+
+
+
 std::ostream& RemoveFront( std::ostream& os )
 {
     SinglyCircularLinkedList<int> list;
@@ -246,30 +297,35 @@ void SinglyCircularLinkedListTests()
     PushBack( std::cout << TITLE( CYAN, "PushBack" ) ) << std::endl;
     PushAfter( std::cout << TITLE( CYAN, "PushAfter" ) ) << std::endl;
 
+    std::cout << std::endl;
+
+    PushNodeFront( std::cout << TITLE( GREEN, "PushNodeFront" ) ) << std::endl;
+    PushNodeBack( std::cout << TITLE( GREEN, "PushNodeBack" ) ) << std::endl;
+    PushNodeAfter( std::cout << TITLE( GREEN, "PushNodeAfter" ) ) << std::endl;
 
     std::cout << std::endl;
 
-    RemoveFront( std::cout << TITLE( GREEN, "RemoveFront" ) ) << std::endl;
-    RemoveAfter( std::cout << TITLE( GREEN, "RemoveAfter" ) ) << std::endl;
+    RemoveFront( std::cout << TITLE( YELLOW, "RemoveFront" ) ) << std::endl;
+    RemoveAfter( std::cout << TITLE( YELLOW, "RemoveAfter" ) ) << std::endl;
 
     std::cout << std::endl;
 
-    PopFront( std::cout << TITLE( YELLOW, "PopFront" ) ) << std::endl;
-    PopAfter( std::cout << TITLE( YELLOW, "PopAfter" ) ) << std::endl;
+    PopFront( std::cout << TITLE( CYAN, "PopFront" ) ) << std::endl;
+    PopAfter( std::cout << TITLE( CYAN, "PopAfter" ) ) << std::endl;
 
     std::cout << std::endl;
 
-    DeleteFront( std::cout << TITLE( CYAN, "DeleteFront" ) ) << std::endl;
-    DeleteAfter( std::cout << TITLE( CYAN, "DeleteAfter" ) ) << std::endl;
-    Clear( std::cout << TITLE( CYAN, "Clear" ) ) << std::endl;
-    ClearOneElement( std::cout << TITLE( CYAN, "ClearOneElement" ) ) << std::endl;
+    DeleteFront( std::cout << TITLE( GREEN, "DeleteFront" ) ) << std::endl;
+    DeleteAfter( std::cout << TITLE( GREEN, "DeleteAfter" ) ) << std::endl;
+    Clear( std::cout << TITLE( GREEN, "Clear" ) ) << std::endl;
+    ClearOneElement( std::cout << TITLE( GREEN, "ClearOneElement" ) ) << std::endl;
 
     std::cout << std::endl;
 
-    DeepDeleteFront( std::cout << TITLE( GREEN, "DeepDeleteFront" ) ) << std::endl;
-    DeepDeleteAfter( std::cout << TITLE( GREEN, "DeepDeleteAfter" ) ) << std::endl;
-    DeepClear( std::cout << TITLE( GREEN, "DeepClear" ) ) << std::endl;
-    DeepClearOneElement( std::cout << TITLE( GREEN, "DeepClearOneElement" ) ) << std::endl;
+    DeepDeleteFront( std::cout << TITLE( YELLOW, "DeepDeleteFront" ) ) << std::endl;
+    DeepDeleteAfter( std::cout << TITLE( YELLOW, "DeepDeleteAfter" ) ) << std::endl;
+    DeepClear( std::cout << TITLE( YELLOW, "DeepClear" ) ) << std::endl;
+    DeepClearOneElement( std::cout << TITLE( YELLOW, "DeepClearOneElement" ) ) << std::endl;
 }
 
 
