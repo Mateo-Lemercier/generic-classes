@@ -54,24 +54,6 @@ protected:
 
     unsigned int m_size = 0;
     Node* m_pTail = new Node();
-
-#ifdef _GLIBCXX_OSTREAM
-    friend std::ostream& operator<<( std::ostream& os, SinglyCircularLinkedList const& list )
-    {
-        if ( list.m_size == 0 )
-        {
-            os << "{}";
-            return os;
-        }
-        Node* pEmptyNode = list.m_pTail->m_pNext;
-        Node* pNode = pEmptyNode->m_pNext;
-        os << "{ " << pNode->GetData();
-        for ( pNode = pNode->m_pNext; pNode != pEmptyNode; pNode = pNode->m_pNext )
-            os << ", " << pNode->GetData();
-        os << " }";
-        return os;
-    }
-#endif
 };
 
 

@@ -10,14 +10,35 @@
 
 
 
+template <typename T>
+void Print( std::ostream& os, SinglyCircularLinkedList<T> const& list )
+{
+    if ( list.IsEmpty() )
+    {
+        os << "{}";
+        return;
+    }
+    typename SinglyCircularLinkedList<T>::Node const* pEmptyNode = list.GetBack()->GetNext();
+    typename SinglyCircularLinkedList<T>::Node const* pNode = pEmptyNode->GetNext();
+    os << "{ " << pNode->GetData();
+    for ( pNode = pNode->GetNext(); pNode != pEmptyNode; pNode = pNode->GetNext() )
+        os << ", " << pNode->GetData();
+    os << " }";
+}
+
+
+
 std::ostream& PushFront( std::ostream& os )
 {
     SinglyCircularLinkedList<int> list;
-    os << ' ' << list;
+    os << ' ';
+    Print<int>( os, list );
     for ( int i = 1; i < 4; i++ )
     {
         list.PushFront( i );
-        os << "\n- " << i << ": " << list << ", size=" << list.GetSize();
+        os << "\n- " << i << ": ";
+        Print<int>( os, list );
+        os << ", size=" << list.GetSize();
     }
     os << RESET_COLOR;
     return os;
@@ -26,11 +47,14 @@ std::ostream& PushFront( std::ostream& os )
 std::ostream& PushBack( std::ostream& os )
 {
     SinglyCircularLinkedList<int> list;
-    os << ' ' << list;
+    os << ' ';
+    Print<int>( os, list );
     for ( int i = 1; i < 4; i++ )
     {
         list.PushBack( i );
-        os << "\n- " << i << ": " << list << ", size=" << list.GetSize();
+        os << "\n- " << i << ": ";
+        Print<int>( os, list );
+        os << ", size=" << list.GetSize();
     }
     os << RESET_COLOR;
     return os;
@@ -40,11 +64,14 @@ std::ostream& PushAfter( std::ostream& os )
 {
     SinglyCircularLinkedList<int> list;
     SinglyCircularLinkedList<int>::Node* const pNode = list.PushBack( 0 );
-    os << ' ' << list;
+    os << ' ';
+    Print<int>( os, list );
     for ( int i = 1; i < 4; i++ )
     {
         list.PushAfter( pNode, i );
-        os << "\n- " << i << ": " << list << ", size=" << list.GetSize();
+        os << "\n- " << i << ": ";
+        Print<int>( os, list );
+        os << ", size=" << list.GetSize();
     }
     os << RESET_COLOR;
     return os;
@@ -58,11 +85,14 @@ std::ostream& PushNodeFront( std::ostream& os )
     SinglyCircularLinkedList<int>::Node* const pNodes[3] = { list.PushBack( 1 ), list.PushBack( 2 ), list.PushBack( 3 ) };
     for ( int i = 0; i < 3; i++ )
         list.RemoveFront();
-    os << ' ' << list;
+    os << ' ';
+    Print<int>( os, list );
     for ( int i = 0; i < 3; i++ )
     {
         list.PushFront( pNodes[i] );
-        os << "\n- " << i+1 << ": " << list << ", size=" << list.GetSize();
+        os << "\n- " << i+1 << ": ";
+        Print<int>( os, list );
+        os << ", size=" << list.GetSize();
     }
     os << RESET_COLOR;
     return os;
@@ -74,11 +104,14 @@ std::ostream& PushNodeBack( std::ostream& os )
     SinglyCircularLinkedList<int>::Node* const pNodes[3] = { list.PushBack( 1 ), list.PushBack( 2 ), list.PushBack( 3 ) };
     for ( int i = 0; i < 3; i++ )
         list.RemoveFront();
-    os << ' ' << list;
+    os << ' ';
+    Print<int>( os, list );
     for ( int i = 0; i < 3; i++ )
     {
         list.PushBack( pNodes[i] );
-        os << "\n- " << i+1 << ": " << list << ", size=" << list.GetSize();
+        os << "\n- " << i+1 << ": ";
+        Print<int>( os, list );
+        os << ", size=" << list.GetSize();
     }
     os << RESET_COLOR;
     return os;
@@ -91,11 +124,14 @@ std::ostream& PushNodeAfter( std::ostream& os )
     SinglyCircularLinkedList<int>::Node* const pNodes[3] = { list.PushBack( 1 ), list.PushBack( 2 ), list.PushBack( 3 ) };
     for ( int i = 0; i < 3; i++ )
         list.RemoveAfter( pNode );
-    os << ' ' << list;
+    os << ' ';
+    Print<int>( os, list );
     for ( int i = 0; i < 3; i++ )
     {
         list.PushAfter( pNode, pNodes[i] );
-        os << "\n- " << i+1 << ": " << list << ", size=" << list.GetSize();
+        os << "\n- " << i+1 << ": ";
+        Print<int>( os, list );
+        os << ", size=" << list.GetSize();
     }
     os << RESET_COLOR;
     return os;
@@ -109,12 +145,15 @@ std::ostream& RemoveFront( std::ostream& os )
     list.PushBack( 1 );
     list.PushBack( 2 );
     list.PushBack( 3 );
-    os << ' ' << list;
+    os << ' ';
+    Print<int>( os, list );
     for ( int i = 1; i < 4; i++ )
     {
         SinglyCircularLinkedList<int>::Node const* const pNode = list.GetFront();
         list.RemoveFront();
-        os << "\n- " << i << ": " << list << ", size=" << list.GetSize();
+        os << "\n- " << i << ": ";
+        Print<int>( os, list );
+        os << ", size=" << list.GetSize();
         delete pNode;
     }
     os << RESET_COLOR;
@@ -128,12 +167,15 @@ std::ostream& RemoveAfter( std::ostream& os )
     list.PushBack( 1 );
     list.PushBack( 2 );
     list.PushBack( 3 );
-    os << ' ' << list;
+    os << ' ';
+    Print<int>( os, list );
     for ( int i = 1; i < 4; i++ )
     {
         SinglyCircularLinkedList<int>::Node const* const pNextNode = pNode->GetNext();
         list.RemoveAfter( pNode );
-        os << "\n- " << i << ": " << list << ", size=" << list.GetSize();
+        os << "\n- " << i << ": ";
+        Print<int>( os, list );
+        os << ", size=" << list.GetSize();
         delete pNextNode;
     }
     os << RESET_COLOR;
@@ -148,11 +190,14 @@ std::ostream& PopFront( std::ostream& os )
     list.PushBack( 1 );
     list.PushBack( 2 );
     list.PushBack( 3 );
-    os << ' ' << list;
+    os << ' ';
+    Print<int>( os, list );
     for ( int i = 1; i < 4; i++ )
     {
         int const popped = list.PopFront();
-        os << "\n- " << i << ": " << list << " (Popped: " << popped << "), size=" << list.GetSize();
+        os << "\n- " << i << ": ";
+        Print<int>( os, list );
+        os << " (Popped: " << popped << "), size=" << list.GetSize();
     }
     os << RESET_COLOR;
     return os;
@@ -165,11 +210,14 @@ std::ostream& PopAfter( std::ostream& os )
     list.PushBack( 1 );
     list.PushBack( 2 );
     list.PushBack( 3 );
-    os << ' ' << list;
+    os << ' ';
+    Print<int>( os, list );
     for ( int i = 1; i < 4; i++ )
     {
         int const popped = list.PopAfter( pNode );
-        os << "\n- " << i << ": " << list << " (Popped: " << popped << "), size=" << list.GetSize();
+        os << "\n- " << i << ": ";
+        Print<int>( os, list );
+        os << " (Popped: " << popped << "), size=" << list.GetSize();
     }
     os << RESET_COLOR;
     return os;
@@ -183,11 +231,14 @@ std::ostream& DeleteFront( std::ostream& os )
     list.PushBack( 1 );
     list.PushBack( 2 );
     list.PushBack( 3 );
-    os << ' ' << list;
+    os << ' ';
+    Print<int>( os, list );
     for ( int i = 1; i < 4; i++ )
     {
         list.DeleteFront();
-        os << "\n- " << i << ": " << list << ", size=" << list.GetSize();
+        os << "\n- " << i << ": ";
+        Print<int>( os, list );
+        os << ", size=" << list.GetSize();
     }
     os << RESET_COLOR;
     return os;
@@ -200,11 +251,14 @@ std::ostream& DeleteAfter( std::ostream& os )
     list.PushBack( 1 );
     list.PushBack( 2 );
     list.PushBack( 3 );
-    os << ' ' << list;
+    os << ' ';
+    Print<int>( os, list );
     for ( int i = 1; i < 4; i++ )
     {
         list.DeleteAfter( pNode );
-        os << "\n- " << i << ": " << list << ", size=" << list.GetSize();
+        os << "\n- " << i << ": ";
+        Print<int>( os, list );
+        os << ", size=" << list.GetSize();
     }
     os << RESET_COLOR;
     return os;
@@ -216,9 +270,12 @@ std::ostream& Clear( std::ostream& os )
     list.PushBack( 1 );
     list.PushBack( 2 );
     list.PushBack( 3 );
-    os << ' ' << list;
+    os << ' ';
+    Print<int>( os, list );
     list.Clear();
-    os << "\n- " << list << ", size=" << list.GetSize() << RESET_COLOR;
+    os << "\n- ";
+    Print<int>( os, list );
+    os << ", size=" << list.GetSize() << RESET_COLOR;
     return os;
 }
 
@@ -226,9 +283,12 @@ std::ostream& ClearOneElement( std::ostream& os )
 {
     SinglyCircularLinkedList<int> list;
     list.PushBack( 1 );
-    os << ' ' << list;
+    os << ' ';
+    Print<int>( os, list );
     list.Clear();
-    os << "\n- " << list << ", size=" << list.GetSize() << RESET_COLOR;
+    os << "\n- ";
+    Print<int>( os, list );
+    os << ", size=" << list.GetSize() << RESET_COLOR;
     return os;
 }
 
@@ -240,11 +300,14 @@ std::ostream& DeepDeleteFront( std::ostream& os )
     list.PushBack( new int(1) );
     list.PushBack( new int(2) );
     list.PushBack( new int(3) );
-    os << ' ' << list;
+    os << ' ';
+    Print<int*>( os, list );
     for ( int i = 1; i < 4; i++ )
     {
         list.DeepDeleteFront();
-        os << "\n- " << i << ": " << list << ", size=" << list.GetSize();
+        os << "\n- " << i << ": ";
+        Print<int*>( os, list );
+        os << ", size=" << list.GetSize();
     }
     os << RESET_COLOR;
     return os;
@@ -257,11 +320,14 @@ std::ostream& DeepDeleteAfter( std::ostream& os )
     list.PushBack( new int(1) );
     list.PushBack( new int(2) );
     list.PushBack( new int(3) );
-    os << ' ' << list;
+    os << ' ';
+    Print<int*>( os, list );
     for ( int i = 1; i < 4; i++ )
     {
         list.DeepDeleteAfter( pNode );
-        os << "\n- " << i << ": " << list << ", size=" << list.GetSize();
+        os << "\n- " << i << ": ";
+        Print<int*>( os, list );
+        os << ", size=" << list.GetSize();
     }
     os << RESET_COLOR;
     return os;
@@ -273,9 +339,12 @@ std::ostream& DeepClear( std::ostream& os )
     list.PushBack( new int(10) );
     list.PushBack( new int(20) );
     list.PushBack( new int(30) );
-    os << ' ' << list;
+    os << ' ';
+    Print<int*>( os, list );
     list.DeepClear();
-    os << "\n- " << list << ", size=" << list.GetSize() << RESET_COLOR;
+    os << "\n- ";
+    Print<int*>( os, list );
+    os << ", size=" << list.GetSize() << RESET_COLOR;
     return os;
 }
 
@@ -283,9 +352,12 @@ std::ostream& DeepClearOneElement( std::ostream& os )
 {
     SinglyCircularLinkedList<int*> list;
     list.PushBack( new int(10) );
-    os << ' ' << list;
+    os << ' ';
+    Print<int*>( os, list );
     list.DeepClear();
-    os << "\n- " << list << ", size=" << list.GetSize() << RESET_COLOR;
+    os << "\n- ";
+    Print<int*>( os, list );
+    os << ", size=" << list.GetSize() << RESET_COLOR;
     return os;
 }
 
@@ -308,10 +380,17 @@ std::ostream& EqualTo( std::ostream& os )
     SinglyCircularLinkedList<int> list3;
     list3.PushBack( 1 );
     list3.PushBack( 2 );
-    os << ' ' << list;
-    os << "\n- " << list1 << ", equal=" << ( list == list1 );
-    os << "\n- " << list2 << ", equal=" << ( list == list2 );
-    os << "\n- " << list3 << ", equal=" << ( list == list3 ) << RESET_COLOR;
+    os << ' ';
+    Print<int>( os, list );
+    os << "\n- ";
+    Print<int>( os, list1 );
+    os << ", equal=" << ( list == list1 );
+    os << "\n- ";
+    Print<int>( os, list2 );
+    os << ", equal=" << ( list == list2 );
+    os << "\n- ";
+    Print<int>( os, list3 );
+    os << ", equal=" << ( list == list3 ) << RESET_COLOR;
     return os;
 }
 
@@ -332,10 +411,17 @@ std::ostream& DifferentThan( std::ostream& os )
     SinglyCircularLinkedList<int> list3;
     list3.PushBack( 1 );
     list3.PushBack( 2 );
-    os << ' ' << list;
-    os << "\n- " << list1 << ", different=" << ( list != list1 );
-    os << "\n- " << list2 << ", different=" << ( list != list2 );
-    os << "\n- " << list3 << ", different=" << ( list != list3 ) << RESET_COLOR;
+    os << ' ';
+    Print<int>( os, list );
+    os << "\n- ";
+    Print<int>( os, list1 );
+    os << ", different=" << ( list != list1 );
+    os << "\n- ";
+    Print<int>( os, list2 );
+    os << ", different=" << ( list != list2 );
+    os << "\n- ";
+    Print<int>( os, list3 );
+    os << ", different=" << ( list != list3 ) << RESET_COLOR;
     return os;
 }
 
