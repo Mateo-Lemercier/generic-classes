@@ -1,30 +1,13 @@
-#include <iostream>
 #include "SinglyCircularLinkedList.hpp"
 #include "SinglyCircularLinkedList-tests.h"
+
+#include <iostream>
 
 #define RESET_COLOR "\033[0m"
 #define GREEN 32
 #define YELLOW 33
 #define CYAN 36
 #define TITLE( color, title ) "\033[1;" << color << 'm' << title << RESET_COLOR << "\033[3;2;" << color << 'm'
-
-
-
-template <typename T>
-void Print( std::ostream& os, SinglyCircularLinkedList<T> const& list )
-{
-    if ( list.IsEmpty() )
-    {
-        os << "{}";
-        return;
-    }
-    typename SinglyCircularLinkedList<T>::Node const* pEmptyNode = list.GetBack()->GetNext();
-    typename SinglyCircularLinkedList<T>::Node const* pNode = pEmptyNode->GetNext();
-    os << "{ " << pNode->GetData();
-    for ( pNode = pNode->GetNext(); pNode != pEmptyNode; pNode = pNode->GetNext() )
-        os << ", " << pNode->GetData();
-    os << " }";
-}
 
 
 
