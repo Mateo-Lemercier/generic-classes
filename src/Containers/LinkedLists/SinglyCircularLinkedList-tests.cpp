@@ -1,7 +1,6 @@
+#include <iostream>
 #include "SinglyCircularLinkedList.hpp"
 #include "SinglyCircularLinkedList-tests.h"
-
-#include <iostream>
 
 #define RESET_COLOR "\033[0m"
 #define GREEN 32
