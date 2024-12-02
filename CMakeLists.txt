@@ -3,4 +3,6 @@ project(generic_classes)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(generic_classes src/main.cpp)
+add_executable(generic_classes src/main.cpp
+        src/define.h
+)
