@@ -800,7 +800,7 @@ bool SQUAREMATRIX::IsTriangular() const
                 return false;
         }
     }
-    return lowerTriangular || upperTriangular;
+    return true;
 }
 
 template <unsigned char size>
