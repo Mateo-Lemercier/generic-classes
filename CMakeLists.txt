@@ -5,4 +5,6 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(generic_classes src/main.cpp
         src/define.h
+
+        src/Maths/Matrix.hpp
 )
