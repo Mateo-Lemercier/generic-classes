@@ -163,6 +163,7 @@ public:
     [[nodiscard]] static bool IsSymmetric();
     [[nodiscard]] bool IsOrthogonal() const;
     [[nodiscard]] static bool IsDiagonal();
+    [[nodiscard]] static bool IsTriangular();
     [[nodiscard]] static bool IsLowerTriangular();
     [[nodiscard]] static bool IsUpperTriangular();
 
@@ -229,6 +230,7 @@ public:
     [[nodiscard]] bool IsSymmetric() const;
     [[nodiscard]] bool IsOrthogonal() const;
     [[nodiscard]] bool IsDiagonal() const;
+    [[nodiscard]] bool IsTriangular() const;
     [[nodiscard]] bool IsLowerTriangular() const;
     [[nodiscard]] bool IsUpperTriangular() const;
 
@@ -784,7 +786,21 @@ bool SQUAREMATRIX::IsDiagonal() const
 template <unsigned char size>
 bool SQUAREMATRIX::IsTriangular() const
 {
-    //
+    bool lowerTriangular = true;
+    bool upperTriangular = true;
+    for ( unsigned char i = 1; i < size; ++i )
+    {
+        for ( unsigned char j = 0; j < i; ++j )
+        {
+            if ( lowerTriangular )
+                lowerTriangular = values[i][j] == 0.0f;
+            if ( upperTriangular )
+                upperTriangular = values[j][i] == 0.0f;
+            if ( ( lowerTriangular || upperTriangular ) == false )
+                return false;
+        }
+    }
+    return lowerTriangular || upperTriangular;
 }
 
 template <unsigned char size>
@@ -1107,6 +1123,11 @@ bool MATRIX1x1::IsOrthogonal() const
 }
 
 bool MATRIX1x1::IsDiagonal()
+{
+    return true;
+}
+
+bool MATRIX1x1::IsTriangular()
 {
     return true;
 }
@@ -1437,6 +1458,11 @@ bool MATRIX2x2::IsOrthogonal() const
 bool MATRIX2x2::IsDiagonal() const
 {
     return values[0][1] == 0.0f && values[1][0] == 0.0f;
+}
+
+bool MATRIX2x2::IsTriangular() const
+{
+    return values[0][1] == 0.0f || values[1][0] == 0.0f;
 }
 
 bool MATRIX2x2::IsUpperTriangular() const
