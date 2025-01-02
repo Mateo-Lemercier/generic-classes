@@ -113,6 +113,7 @@ VECTOR3& VECTOR3::operator*=( T const scalar )
 template <typename T>
 VECTOR3& VECTOR3::operator/=( T const scalar )
 {
+    assert( scalar != 0 )
     T const invScalar = 1 / scalar;
     x *= invScalar;
     y *= invScalar;
