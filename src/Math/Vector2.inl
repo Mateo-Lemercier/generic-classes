@@ -80,6 +80,26 @@ VECTOR2 VECTOR2::Normalize() const
     return Vector( x * invNorm, y * invNorm );
 }
 
+template <typename T>
+VECTOR2 VECTOR2::Clamp( Vector const& min, Vector const& max ) const
+{
+    assert( min.x <= max.x && min.y <= max.y )
+    return Vector(
+        ( x < min.x ) ? min.x : ( ( x > max.x ) ? max.x : x ),
+        ( y < min.y ) ? min.y : ( ( y > max.y ) ? max.y : y )
+    );
+}
+
+template <typename T>
+VECTOR2 VECTOR2::Clamp( T const min, T const max ) const
+{
+    assert( min <= max )
+    return Vector(
+        ( x < min ) ? min : ( ( x > max ) ? max : x ),
+        ( y < min ) ? min : ( ( y > max ) ? max : y )
+    );
+}
+
 
 
 template <typename T>
@@ -90,6 +110,34 @@ VECTOR2& VECTOR2::SelfNormalize()
     T const invNorm = 1 / norm;
     x *= invNorm;
     y *= invNorm;
+    return *this;
+}
+
+template <typename T>
+VECTOR2 VECTOR2::SelfClamp( Vector const& min, Vector const& max )
+{
+    assert( min.x <= max.x && min.y <= max.y )
+
+    if ( x < min.x ) x = min.x;
+    else if ( x > max.x ) x = max.x;
+
+    if ( y < min.y ) y = min.y;
+    else if ( y > max.y ) y = max.y;
+
+    return *this;
+}
+
+template <typename T>
+VECTOR2 VECTOR2::SelfClamp( T const min, T const max )
+{
+    assert( min <= max )
+
+    if ( x < min ) x = min;
+    else if ( x > max ) x = max;
+
+    if ( y < min ) y = min;
+    else if ( y > max ) y = max;
+
     return *this;
 }
 
