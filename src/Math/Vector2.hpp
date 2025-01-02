@@ -66,6 +66,7 @@ public:
 
 #include "Vector2.inl"
 
+typedef Vector<char, 2> Vector2c;
 typedef Vector<int, 2> Vector2i;
 typedef Vector<float, 2> Vector2f;
 typedef Vector<double, 2> Vector2d;
