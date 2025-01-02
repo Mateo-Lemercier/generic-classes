@@ -70,6 +70,12 @@ T VECTOR3::Norm() const { return std::sqrt( x * x + y * y + z * z ); }
 template <typename T>
 T VECTOR3::NormSquared() const { return x * x + y * y + z * z; }
 
+template <typename T>
+T VECTOR3::DistanceTo( Vector const& other ) const { return std::sqrt( x * other.x + y * other.y + z * other.z ); }
+
+template <typename T>
+T VECTOR3::DistanceToSquared( Vector const& other ) const { return x * other.x + y * other.y + z * other.z; }
+
 
 
 template <typename T>
