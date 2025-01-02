@@ -4,6 +4,7 @@ project(generic_classes LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 
 set(HEADER_FILES generic-classes.h
+        src/Container.h
 
 )
 
