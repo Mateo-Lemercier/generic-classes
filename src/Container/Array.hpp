@@ -22,6 +22,8 @@ public:
     [[nodiscard]] T const& Front() const;
     [[nodiscard]] T const& Back() const;
 
+    void Swap( unsigned int index1, unsigned int index2 );
+
     T& operator[]( unsigned int index );
     [[nodiscard]] T const& operator[]( unsigned int index ) const;
 

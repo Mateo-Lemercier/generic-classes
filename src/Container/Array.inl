@@ -49,6 +49,17 @@ T const& ARRAY::Back() const { return m_values[size-1]; }
 
 
 template <typename T, unsigned int size>
+void ARRAY::Swap( unsigned int const index1, unsigned int const index2 )
+{
+    assert( index1 < size && index2 < size )
+    T const temp = m_values[ index1 ];
+    m_values[ index1 ] = m_values[ index2 ];
+    m_values[ index2 ] = temp;
+}
+
+
+
+template <typename T, unsigned int size>
 T& ARRAY::operator[]( unsigned int const index )
 {
     assert( index < size )
