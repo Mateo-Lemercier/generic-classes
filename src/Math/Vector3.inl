@@ -254,6 +254,9 @@ VECTOR3& VECTOR3::operator/=( T const scalar )
 
 
 template <typename T>
+VECTOR3::operator bool() const { return x != 0 || y != 0 || z != 0; }
+
+template <typename T>
 bool VECTOR3::operator==( Vector const& other ) const { return x == other.x && y == other.y && z == other.z; }
 
 template <typename T>

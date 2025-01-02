@@ -229,6 +229,9 @@ VECTOR2& VECTOR2::operator/=( T const scalar )
 
 
 template <typename T>
+VECTOR2::operator bool() const { return x != 0 || y != 0; }
+
+template <typename T>
 bool VECTOR2::operator==( Vector const& other ) const { return x == other.x && y == other.y; }
 
 template <typename T>

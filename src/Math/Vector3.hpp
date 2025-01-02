@@ -58,6 +58,7 @@ public:
     Vector& operator*=( T scalar );
     Vector& operator/=( T scalar );
 
+    [[nodiscard]] explicit operator bool() const;
     [[nodiscard]] bool operator==( Vector const& other ) const;
     [[nodiscard]] bool operator!=( Vector const& other ) const;
     [[nodiscard]] bool operator<=( Vector const& other ) const;
