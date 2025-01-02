@@ -12,6 +12,15 @@ public:
     unsigned char b = 0;
     float a = 1.0f;
 
+    static Color const Black;
+    static Color const White;
+    static Color const Red;
+    static Color const Green;
+    static Color const Blue;
+    static Color const Cyan;
+    static Color const Magenta;
+    static Color const Yellow;
+
     Color() = default;
     Color( unsigned char r, unsigned char g, unsigned char b, float a = 1.0f );
 };
