@@ -1,5 +1,6 @@
 #ifndef MATH_VECTOR3_HPP_INCLUDED
 #define MATH_VECTOR3_HPP_INCLUDED
+#include "../define.h"
 #include "Vector.hpp"
 namespace Math {
 
@@ -26,6 +27,13 @@ public:
     Vector( Vector const& other );
 
     Vector& operator=( Vector const& other );
+
+    Vector& operator+=( Vector const& other );
+    Vector& operator-=( Vector const& other );
+    Vector& operator*=( Vector const& other );
+    Vector& operator/=( Vector const& other );
+    Vector& operator*=( T scalar );
+    Vector& operator/=( T scalar );
 };
 
 

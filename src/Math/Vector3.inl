@@ -64,5 +64,63 @@ VECTOR3& VECTOR3::operator=( Vector const& other )
 
 
 
+template <typename T>
+VECTOR3& VECTOR3::operator+=( Vector const& other )
+{
+    x += other.x;
+    y += other.y;
+    z += other.z;
+    return *this;
+}
+
+template <typename T>
+VECTOR3& VECTOR3::operator-=( Vector const& other )
+{
+    x -= other.x;
+    y -= other.y;
+    z -= other.z;
+    return *this;
+}
+
+template <typename T>
+VECTOR3& VECTOR3::operator*=( Vector const& other )
+{
+    x *= other.x;
+    y *= other.y;
+    z *= other.z;
+    return *this;
+}
+
+template <typename T>
+VECTOR3& VECTOR3::operator/=( Vector const& other )
+{
+    assert( other.x != 0 && other.y != 0 && other.z != 0 )
+    x /= other.x;
+    y /= other.y;
+    z /= other.z;
+    return *this;
+}
+
+template <typename T>
+VECTOR3& VECTOR3::operator*=( T const scalar )
+{
+    x *= scalar;
+    y *= scalar;
+    z *= scalar;
+    return *this;
+}
+
+template <typename T>
+VECTOR3& VECTOR3::operator/=( T const scalar )
+{
+    T const invScalar = 1 / scalar;
+    x *= invScalar;
+    y *= invScalar;
+    z *= invScalar;
+    return *this;
+}
+
+
+
 #undef VECTOR3
 #endif
