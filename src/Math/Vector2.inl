@@ -31,7 +31,7 @@ VECTOR2::Vector( T const x, T const y ):
 {}
 
 template <typename T>
-VECTOR2::Vector( const T (&&values)[2] ):
+VECTOR2::Vector( T const (&&values)[2] ):
     x( values[0] ),
     y( values[1] )
 {}

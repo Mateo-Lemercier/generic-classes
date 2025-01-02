@@ -38,7 +38,7 @@ VECTOR3::Vector( T const x, T const y, T const z ):
 {}
 
 template <typename T>
-VECTOR3::Vector( const T (&&values)[3] ):
+VECTOR3::Vector( T const (&&values)[3] ):
     x( values[0] ),
     y( values[1] ),
     z( values[2] )
