@@ -10,6 +10,8 @@ set(HEADER_FILES generic-classes.h
         src/Math/Vectors.h
         src/Math/Vector.hpp
         src/Math/Vector.inl
+        src/Math/Vector1.hpp
+        src/Math/Vector1.inl
         src/Math/Vector2.hpp
         src/Math/Vector2.inl
         src/Math/Vector3.hpp
