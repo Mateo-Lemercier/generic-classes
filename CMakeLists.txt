@@ -9,6 +9,8 @@ set(HEADER_FILES generic-classes.h
 
         src/Math/Vector.hpp
         src/Math/Vector.inl
+        src/Math/Vector2.hpp
+        src/Math/Vector2.inl
 )
 
 set(SOURCE_FILES generic-classes.cpp
