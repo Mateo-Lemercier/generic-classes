@@ -5,6 +5,10 @@ set(CMAKE_CXX_STANDARD 20)
 
 set(HEADER_FILES generic-classes.h
         src/Container.h
+
+        src/Container/Array.hpp
+        src/Container/Array.inl
+
         src/Math.h
 
         src/Math/Vectors.h
