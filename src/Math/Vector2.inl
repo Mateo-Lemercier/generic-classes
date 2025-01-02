@@ -63,6 +63,30 @@ T VECTOR2::NormSquared() const { return x * x + y * y; }
 
 
 template <typename T>
+VECTOR2 VECTOR2::Normalize() const
+{
+    T const norm = Norm();
+    assert( norm != 0 )
+    T const invNorm = 1 / norm;
+    return Vector( x * invNorm, y * invNorm );
+}
+
+
+
+template <typename T>
+VECTOR2& VECTOR2::SelfNormalize()
+{
+    T const norm = Norm();
+    if ( norm == 0 ) return *this;
+    T const invNorm = 1 / norm;
+    x *= invNorm;
+    y *= invNorm;
+    return *this;
+}
+
+
+
+template <typename T>
 VECTOR2 VECTOR2::operator+( Vector const& other ) const { return Vector( x + other.x, y + other.y ); }
 
 template <typename T>
