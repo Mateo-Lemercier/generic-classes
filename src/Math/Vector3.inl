@@ -86,6 +86,7 @@ VECTOR3 VECTOR3::operator*( T const scalar ) const { return Vector( x * scalar, 
 template <typename T>
 VECTOR3 VECTOR3::operator/( T const scalar ) const
 {
+    assert( scalar != 0 )
     T const invScalar = 1 / scalar;
     return Vector( x * invScalar, y * invScalar, z * invScalar );
 }
