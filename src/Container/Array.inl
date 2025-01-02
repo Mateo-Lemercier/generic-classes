@@ -27,6 +27,13 @@ ARRAY& ARRAY::operator=( Array const& other )
         m_values[i] = other.m_values[i];
 }
 
+template <typename T, unsigned int size>
+void ARRAY::Fill( T const& value )
+{
+    for ( unsigned int i = 0; i < size; i++ )
+        m_values[i] = value;
+}
+
 
 
 template <typename T, unsigned int size>

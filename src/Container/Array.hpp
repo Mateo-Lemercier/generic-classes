@@ -14,6 +14,7 @@ public:
     Array( Array const& other );
 
     Array& operator=( Array const& other );
+    void Fill( T const& value );
 
     [[nodiscard]] unsigned int Size() const;
 
