@@ -28,6 +28,14 @@ public:
 
     Vector& operator=( Vector const& other );
 
+    [[nodiscard]] Vector operator+( Vector const& other ) const;
+    [[nodiscard]] Vector operator-( Vector const& other ) const;
+    [[nodiscard]] Vector operator*( Vector const& other ) const;
+    [[nodiscard]] Vector operator/( Vector const& other ) const;
+    [[nodiscard]] Vector operator*( T scalar ) const;
+    [[nodiscard]] Vector operator/( T scalar ) const;
+    [[nodiscard]] Vector operator-() const;
+
     Vector& operator+=( Vector const& other );
     Vector& operator-=( Vector const& other );
     Vector& operator*=( Vector const& other );

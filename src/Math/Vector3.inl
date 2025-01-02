@@ -65,6 +65,37 @@ VECTOR3& VECTOR3::operator=( Vector const& other )
 
 
 template <typename T>
+VECTOR3 VECTOR3::operator+( Vector const& other ) const { return Vector( x + other.x, y + other.y, z + other.z ); }
+
+template <typename T>
+VECTOR3 VECTOR3::operator-( Vector const& other ) const { return Vector( x - other.x, y - other.y, z - other.z ); }
+
+template <typename T>
+VECTOR3 VECTOR3::operator*( Vector const& other ) const { return Vector( x * other.x, y * other.y, z * other.z ); }
+
+template <typename T>
+VECTOR3 VECTOR3::operator/( Vector const& other ) const
+{
+    assert( other.x != 0 && other.y != 0 && other.z != 0 )
+    return Vector( x / other.x, y / other.y, z / other.z );
+}
+
+template <typename T>
+VECTOR3 VECTOR3::operator*( T const scalar ) const { return Vector( x * scalar, y * scalar, z * scalar ); }
+
+template <typename T>
+VECTOR3 VECTOR3::operator/( T const scalar ) const
+{
+    T const invScalar = 1 / scalar;
+    return Vector( x * invScalar, y * invScalar, z * invScalar );
+}
+
+template <typename T>
+VECTOR3 VECTOR3::operator-() const { return Vector( -x, -y, -z ); }
+
+
+
+template <typename T>
 VECTOR3& VECTOR3::operator+=( Vector const& other )
 {
     x += other.x;
