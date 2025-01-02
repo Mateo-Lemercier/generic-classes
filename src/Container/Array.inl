@@ -29,5 +29,21 @@ ARRAY& ARRAY::operator=( Array const& other )
 
 
 
+template <typename T, unsigned int size>
+T& ARRAY::operator[]( unsigned int const index )
+{
+    assert( index < size )
+    return m_values[index];
+}
+
+template <typename T, unsigned int size>
+T const& ARRAY::operator[]( unsigned int const index ) const
+{
+    assert( index < size )
+    return m_values[index];
+}
+
+
+
 #undef ARRAY
 #endif

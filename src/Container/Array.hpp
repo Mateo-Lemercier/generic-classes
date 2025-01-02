@@ -15,6 +15,9 @@ public:
 
     Array& operator=( Array const& other );
 
+    T& operator[]( unsigned int index );
+    [[nodiscard]] T const& operator[]( unsigned int index ) const;
+
 private:
     T m_values[size] {};
 };
