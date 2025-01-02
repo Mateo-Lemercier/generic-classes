@@ -22,6 +22,9 @@ set(SOURCE_FILES generic-classes.cpp
 
 add_library(generic_classes STATIC ${HEADER_FILES} ${SOURCE_FILES})
 
+add_executable(Vectors tests/Vectors.cpp)
+target_link_libraries(Vectors PRIVATE generic_classes)
 
 enable_testing()
 
+add_test(NAME Vectors COMMAND $<TARGET_FILE:Vectors>)
