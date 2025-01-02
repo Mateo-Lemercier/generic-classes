@@ -65,6 +65,14 @@ VECTOR3& VECTOR3::operator=( Vector const& other )
 
 
 template <typename T>
+T VECTOR3::Norm() const { return std::sqrt( x * x + y * y + z * z ); }
+
+template <typename T>
+T VECTOR3::NormSquared() const { return x * x + y * y + z * z; }
+
+
+
+template <typename T>
 VECTOR3 VECTOR3::operator+( Vector const& other ) const { return Vector( x + other.x, y + other.y, z + other.z ); }
 
 template <typename T>
