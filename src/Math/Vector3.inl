@@ -44,6 +44,24 @@ VECTOR3::Vector( const T (&&values)[3] ):
     z( values[2] )
 {}
 
+template <typename T>
+VECTOR3::Vector( Vector const& other ):
+    x( other.x ),
+    y( other.y ),
+    z( other.z )
+{}
+
+
+
+template <typename T>
+VECTOR3& VECTOR3::operator=( Vector const& other )
+{
+    x = other.x;
+    y = other.y;
+    z = other.z;
+    return *this;
+}
+
 
 
 #undef VECTOR3

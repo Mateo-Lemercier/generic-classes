@@ -23,6 +23,9 @@ public:
     Vector() = default;
     explicit Vector( T x, T y, T z );
     Vector( T const (&&values)[3] );
+    Vector( Vector const& other );
+
+    Vector& operator=( Vector const& other );
 };
 
 
