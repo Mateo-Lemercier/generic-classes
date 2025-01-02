@@ -64,10 +64,10 @@ template <typename T>
 T VECTOR2::Dot( VECTOR2 const& other ) const { return x * other.x + y * other.y; }
 
 template <typename T>
-T VECTOR2::DistanceTo( Vector const& other ) const { return sqrt( x * other.x + y * other.y ); }
+T VECTOR2::DistanceTo( Vector const& other ) const { return ( other - *this ).Norm(); }
 
 template <typename T>
-T VECTOR2::DistanceToSquared( Vector const& other ) const { return x * other.x + y * other.y; }
+T VECTOR2::DistanceToSquared( Vector const& other ) const { return ( other - *this ).NormSquared(); }
 
 
 
