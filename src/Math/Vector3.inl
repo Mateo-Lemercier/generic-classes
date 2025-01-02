@@ -5,6 +5,32 @@
 
 
 template <typename T>
+VECTOR3 const VECTOR3::Zero = VECTOR3( 0, 0, 0 );
+
+template <typename T>
+VECTOR3 const VECTOR3::One = VECTOR3( 1, 1, 1 );
+
+template <typename T>
+VECTOR3 const VECTOR3::Up = VECTOR3( 0, 1, 0 );
+
+template <typename T>
+VECTOR3 const VECTOR3::Left = VECTOR3( -1, 0, 0 );
+
+template <typename T>
+VECTOR3 const VECTOR3::Down = VECTOR3( 0, -1, 0 );
+
+template <typename T>
+VECTOR3 const VECTOR3::Right = VECTOR3( 1, 0, 0 );
+
+template <typename T>
+VECTOR3 const VECTOR3::Forward = VECTOR3( 0, 0, 1 );
+
+template <typename T>
+VECTOR3 const VECTOR3::Back = VECTOR3( 0, 0, -1 );
+
+
+
+template <typename T>
 VECTOR3::Vector( T const x, T const y, T const z ):
     x( x ),
     y( y ),
