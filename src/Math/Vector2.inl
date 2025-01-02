@@ -55,6 +55,37 @@ VECTOR2& VECTOR2::operator=( Vector const& other )
 
 
 template <typename T>
+VECTOR2 VECTOR2::operator+( Vector const& other ) const { return Vector( x + other.x, y + other.y ); }
+
+template <typename T>
+VECTOR2 VECTOR2::operator-( Vector const& other ) const { return Vector( x - other.x, y - other.y ); }
+
+template <typename T>
+VECTOR2 VECTOR2::operator*( Vector const& other ) const { return Vector( x * other.x, y * other.y ); }
+
+template <typename T>
+VECTOR2 VECTOR2::operator/( Vector const& other ) const
+{
+    assert( other.x != 0 && other.y != 0 )
+    return Vector( x / other.x, y / other.y );
+}
+
+template <typename T>
+VECTOR2 VECTOR2::operator*( T const scalar ) const { return Vector( x * scalar, y * scalar ); }
+
+template <typename T>
+VECTOR2 VECTOR2::operator/( T const scalar ) const
+{
+    T const invScalar = 1 / scalar;
+    return Vector( x * invScalar, y * invScalar );
+}
+
+template <typename T>
+VECTOR2 VECTOR2::operator-() const { return Vector( -x, -y ); }
+
+
+
+template <typename T>
 VECTOR2& VECTOR2::operator+=( Vector const& other )
 {
     x += other.x;
