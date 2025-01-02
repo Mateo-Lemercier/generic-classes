@@ -32,6 +32,10 @@ public:
     [[nodiscard]] T Norm() const;
     [[nodiscard]] T NormSquared() const;
 
+    [[nodiscard]] Vector Normalize() const;
+
+    Vector& SelfNormalize();
+
     [[nodiscard]] Vector operator+( Vector const& other ) const;
     [[nodiscard]] Vector operator-( Vector const& other ) const;
     [[nodiscard]] Vector operator*( Vector const& other ) const;

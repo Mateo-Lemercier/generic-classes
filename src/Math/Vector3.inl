@@ -73,6 +73,31 @@ T VECTOR3::NormSquared() const { return x * x + y * y + z * z; }
 
 
 template <typename T>
+VECTOR3 VECTOR3::Normalize() const
+{
+    T const norm = Norm();
+    assert( norm != 0 )
+    T const invNorm = 1 / norm;
+    return Vector( x * invNorm, y * invNorm, z * invNorm );
+}
+
+
+
+template <typename T>
+VECTOR3& VECTOR3::SelfNormalize()
+{
+    T const norm = Norm();
+    if ( norm == 0 ) return *this;
+    T const invNorm = 1 / norm;
+    x *= invNorm;
+    y *= invNorm;
+    z *= invNorm;
+    return *this;
+}
+
+
+
+template <typename T>
 VECTOR3 VECTOR3::operator+( Vector const& other ) const { return Vector( x + other.x, y + other.y, z + other.z ); }
 
 template <typename T>
