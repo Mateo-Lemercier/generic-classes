@@ -38,8 +38,8 @@ public:
     [[nodiscard]] Vector Clamp( T min, T max ) const;
 
     Vector& SelfNormalize();
-    [[nodiscard]] Vector SelfClamp( Vector const& min, Vector const& max );
-    [[nodiscard]] Vector SelfClamp( T min, T max );
+    Vector& SelfClamp( Vector const& min, Vector const& max );
+    Vector& SelfClamp( T min, T max );
 
     [[nodiscard]] Vector operator+( Vector const& other ) const;
     [[nodiscard]] Vector operator-( Vector const& other ) const;

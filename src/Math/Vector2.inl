@@ -114,7 +114,7 @@ VECTOR2& VECTOR2::SelfNormalize()
 }
 
 template <typename T>
-VECTOR2 VECTOR2::SelfClamp( Vector const& min, Vector const& max )
+VECTOR2& VECTOR2::SelfClamp( Vector const& min, Vector const& max )
 {
     assert( min.x <= max.x && min.y <= max.y )
 
@@ -128,7 +128,7 @@ VECTOR2 VECTOR2::SelfClamp( Vector const& min, Vector const& max )
 }
 
 template <typename T>
-VECTOR2 VECTOR2::SelfClamp( T const min, T const max )
+VECTOR2& VECTOR2::SelfClamp( T const min, T const max )
 {
     assert( min <= max )
 
