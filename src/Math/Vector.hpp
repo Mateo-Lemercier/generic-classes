@@ -11,7 +11,7 @@ public:
     T values[size] {};
 
     Vector() = default;
-    explicit Vector( T const (&values)[size] );
+    Vector( T const (&&values)[size] );
 };
 
 

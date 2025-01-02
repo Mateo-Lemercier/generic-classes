@@ -13,7 +13,7 @@ public:
 
     Vector() = default;
     explicit Vector( T x, T y );
-    explicit Vector( T const (&values)[2] );
+    Vector( T const (&&values)[2] );
 };
 
 

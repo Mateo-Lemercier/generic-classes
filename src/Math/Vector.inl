@@ -4,7 +4,7 @@
 
 
 template <typename T, unsigned char size>
-Vector<T, size>::Vector( T const (&values)[size] )
+Vector<T, size>::Vector( T const (&&values)[size] )
 {
     for ( unsigned char i = 0; i < size; i++ )
         values[i] = values[i];

@@ -10,7 +10,7 @@ Vector<T, 3>::Vector( T const x, T const y, T const z ):
     z( z ) {}
 
 template <typename T>
-Vector<T, 3>::Vector( const T (& values)[3] ):
+Vector<T, 3>::Vector( const T (&&values)[3] ):
     x( values[0] ),
     y( values[1] ),
     z( values[2] ) {}
