@@ -11,6 +11,13 @@ class Vector<T, 2>
 public:
     T x, y;
 
+    static Vector const Zero;
+    static Vector const One;
+    static Vector const Up;
+    static Vector const Left;
+    static Vector const Down;
+    static Vector const Right;
+
     Vector() = default;
     explicit Vector( T x, T y );
     Vector( T const (&&values)[2] );
