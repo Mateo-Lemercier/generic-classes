@@ -40,6 +40,11 @@ public:
     Vector& operator/=( Vector const& other );
     Vector& operator*=( T scalar );
     Vector& operator/=( T scalar );
+
+    [[nodiscard]] bool operator==( Vector const& other ) const;
+    [[nodiscard]] bool operator!=( Vector const& other ) const;
+    [[nodiscard]] bool operator<=( Vector const& other ) const;
+    [[nodiscard]] bool operator>=( Vector const& other ) const;
 };
 
 

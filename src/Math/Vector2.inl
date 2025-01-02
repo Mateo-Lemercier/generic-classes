@@ -137,5 +137,19 @@ VECTOR2& VECTOR2::operator/=( T const scalar )
 
 
 
+template <typename T>
+bool VECTOR2::operator==( Vector const& other ) const { return x == other.x && y == other.y; }
+
+template <typename T>
+bool VECTOR2::operator!=( Vector const& other ) const { return x != other.x || y != other.y; }
+
+template <typename T>
+bool VECTOR2::operator<=( Vector const& other ) const { return x <= other.x && y <= other.y; }
+
+template <typename T>
+bool VECTOR2::operator>=( Vector const& other ) const { return x >= other.x && y >= other.y; }
+
+
+
 #undef VECTOR2
 #endif
