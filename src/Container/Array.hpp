@@ -34,6 +34,16 @@ private:
 
 
 
+template <typename T>
+class Array<T, 0>
+{
+public:
+    Array() = delete;
+    ~Array() = delete;
+};
+
+
+
 #include "Array.inl"
 
 }
