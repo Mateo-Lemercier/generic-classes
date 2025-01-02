@@ -30,6 +30,11 @@ ARRAY& ARRAY::operator=( Array const& other )
 
 
 template <typename T, unsigned int size>
+unsigned int ARRAY::Size() const { return size; }
+
+
+
+template <typename T, unsigned int size>
 T& ARRAY::Front() { return m_values[0]; }
 
 template <typename T, unsigned int size>

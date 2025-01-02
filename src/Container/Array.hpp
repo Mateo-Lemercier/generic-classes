@@ -15,6 +15,8 @@ public:
 
     Array& operator=( Array const& other );
 
+    [[nodiscard]] unsigned int Size() const;
+
     T& Front();
     T& Back();
     [[nodiscard]] T const& Front() const;
