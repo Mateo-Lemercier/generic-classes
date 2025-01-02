@@ -60,6 +60,12 @@ T VECTOR2::Norm() const { return std::sqrt( x * x + y * y ); }
 template <typename T>
 T VECTOR2::NormSquared() const { return x * x + y * y; }
 
+template <typename T>
+T VECTOR2::DistanceTo( Vector const& other ) const { return sqrt( x * other.x + y * other.y ); }
+
+template <typename T>
+T VECTOR2::DistanceToSquared( Vector const& other ) const { return x * other.x + y * other.y; }
+
 
 
 template <typename T>

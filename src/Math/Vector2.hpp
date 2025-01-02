@@ -29,6 +29,8 @@ public:
 
     [[nodiscard]] T Norm() const;
     [[nodiscard]] T NormSquared() const;
+    [[nodiscard]] T DistanceTo( Vector const& other ) const;
+    [[nodiscard]] T DistanceToSquared( Vector const& other ) const;
 
     [[nodiscard]] Vector Normalize() const;
 
