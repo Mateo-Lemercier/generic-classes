@@ -36,6 +36,22 @@ VECTOR2::Vector( const T (&&values)[2] ):
     y( values[1] )
 {}
 
+template <typename T>
+VECTOR2::Vector( Vector const& other ):
+    x( other.x ),
+    y( other.y )
+{}
+
+
+
+template <typename T>
+VECTOR2& VECTOR2::operator=( Vector const& other )
+{
+    x = other.x;
+    y = other.y;
+    return *this;
+}
+
 
 
 #undef VECTOR2
