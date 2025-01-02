@@ -36,8 +36,12 @@ public:
     [[nodiscard]] T DistanceToSquared( Vector const& other ) const;
 
     [[nodiscard]] Vector Normalize() const;
+    [[nodiscard]] Vector Clamp( Vector const& min, Vector const& max ) const;
+    [[nodiscard]] Vector Clamp( T min, T max ) const;
 
     Vector& SelfNormalize();
+    Vector& SelfClamp( Vector const& min, Vector const& max );
+    Vector& SelfClamp( T min, T max );
 
     [[nodiscard]] Vector operator+( Vector const& other ) const;
     [[nodiscard]] Vector operator-( Vector const& other ) const;

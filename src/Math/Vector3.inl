@@ -90,6 +90,28 @@ VECTOR3 VECTOR3::Normalize() const
     return Vector( x * invNorm, y * invNorm, z * invNorm );
 }
 
+template <typename T>
+VECTOR3 VECTOR3::Clamp( Vector const& min, Vector const& max ) const
+{
+    assert( min.x <= max.x && min.y <= max.y && min.z <= max.z )
+    return Vector(
+        ( x < min.x ) ? min.x : ( ( x > max.x ) ? max.x : x ),
+        ( y < min.y ) ? min.y : ( ( y > max.y ) ? max.y : y ),
+        ( z < min.z ) ? min.z : ( ( z > max.z ) ? max.z : z )
+    );
+}
+
+template <typename T>
+VECTOR3 VECTOR3::Clamp( T const min, T const max ) const
+{
+    assert( min <= max )
+    return Vector(
+        ( x < min ) ? min : ( ( x > max ) ? max : x ),
+        ( y < min ) ? min : ( ( y > max ) ? max : y ),
+        ( z < min ) ? min : ( ( z > max ) ? max : z )
+    );
+}
+
 
 
 template <typename T>
@@ -101,6 +123,40 @@ VECTOR3& VECTOR3::SelfNormalize()
     x *= invNorm;
     y *= invNorm;
     z *= invNorm;
+    return *this;
+}
+
+template <typename T>
+VECTOR3& VECTOR3::SelfClamp( Vector const& min, Vector const& max )
+{
+    assert( min.x <= max.x && min.y <= max.y && min.z <= max.z )
+
+    if ( x < min.x ) x = min.x;
+    else if ( x > max.x ) x = max.x;
+
+    if ( y < min.y ) y = min.y;
+    else if ( y > max.y ) y = max.y;
+
+    if ( z < min.z ) z = min.z;
+    else if ( z > max.z ) z = max.z;
+
+    return *this;
+}
+
+template <typename T>
+VECTOR3& VECTOR3::SelfClamp( T const min, T const max )
+{
+    assert( min <= max )
+
+    if ( x < min ) x = min;
+    else if ( x > max ) x = max;
+
+    if ( y < min ) y = min;
+    else if ( y > max ) y = max;
+
+    if ( z < min ) z = min;
+    else if ( z > max ) z = max;
+
     return *this;
 }
 
