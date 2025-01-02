@@ -1,6 +1,7 @@
 #ifndef MATH_VECTOR2_HPP_INCLUDED
 #define MATH_VECTOR2_HPP_INCLUDED
 #include "../define.h"
+#include <cmath>
 #include "Vector.hpp"
 namespace Math {
 
@@ -25,6 +26,9 @@ public:
     Vector( Vector const& other );
 
     Vector& operator=( Vector const& other );
+
+    [[nodiscard]] T Norm() const;
+    [[nodiscard]] T NormSquared() const;
 
     [[nodiscard]] Vector operator+( Vector const& other ) const;
     [[nodiscard]] Vector operator-( Vector const& other ) const;

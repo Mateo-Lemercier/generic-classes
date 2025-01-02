@@ -55,6 +55,14 @@ VECTOR2& VECTOR2::operator=( Vector const& other )
 
 
 template <typename T>
+T VECTOR2::Norm() const { return std::sqrt( x * x + y * y ); }
+
+template <typename T>
+T VECTOR2::NormSquared() const { return x * x + y * y; }
+
+
+
+template <typename T>
 VECTOR2 VECTOR2::operator+( Vector const& other ) const { return Vector( x + other.x, y + other.y ); }
 
 template <typename T>
