@@ -11,6 +11,9 @@ class Array
 public:
     Array() = default;
     Array( T const (&&values)[size] );
+    Array( Array const& other );
+
+    Array& operator=( Array const& other );
 
 private:
     T m_values[size] {};
