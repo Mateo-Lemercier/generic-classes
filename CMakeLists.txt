@@ -7,6 +7,8 @@ set(HEADER_FILES generic-classes.h
         src/Container.h
         src/Math.h
 
+        src/Math/Vector.hpp
+        src/Math/Vector.inl
 )
 
 set(SOURCE_FILES generic-classes.cpp
