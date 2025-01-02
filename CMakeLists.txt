@@ -20,10 +20,13 @@ set(HEADER_FILES generic-classes.h
         src/Math/Vector2.inl
         src/Math/Vector3.hpp
         src/Math/Vector3.inl
+        src/Math/Color.h
+        src/Math/Color.inl
 )
 
 set(SOURCE_FILES generic-classes.cpp
 
+        src/Math/Color.cpp
 )
 
 add_library(generic_classes STATIC ${HEADER_FILES} ${SOURCE_FILES})
