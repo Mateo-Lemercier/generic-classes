@@ -15,6 +15,11 @@ public:
 
     Array& operator=( Array const& other );
 
+    T& Front();
+    T& Back();
+    [[nodiscard]] T const& Front() const;
+    [[nodiscard]] T const& Back() const;
+
     T& operator[]( unsigned int index );
     [[nodiscard]] T const& operator[]( unsigned int index ) const;
 

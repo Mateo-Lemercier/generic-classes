@@ -30,6 +30,20 @@ ARRAY& ARRAY::operator=( Array const& other )
 
 
 template <typename T, unsigned int size>
+T& ARRAY::Front() { return m_values[0]; }
+
+template <typename T, unsigned int size>
+T& ARRAY::Back() { return m_values[size-1]; }
+
+template <typename T, unsigned int size>
+T const& ARRAY::Front() const { return m_values[0]; }
+
+template <typename T, unsigned int size>
+T const& ARRAY::Back() const { return m_values[size-1]; }
+
+
+
+template <typename T, unsigned int size>
 T& ARRAY::operator[]( unsigned int const index )
 {
     assert( index < size )
