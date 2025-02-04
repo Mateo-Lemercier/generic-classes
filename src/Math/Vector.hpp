@@ -1,5 +1,6 @@
 #ifndef MATH_VECTOR_HPP_INCLUDED
 #define MATH_VECTOR_HPP_INCLUDED
+#include "../define.h"
 namespace Math {
 
 
@@ -20,4 +21,9 @@ struct Vector
 #include "Vector.inl"
 
 }
+
+#include "Vector1.hpp"
+#include "Vector2.hpp"
+#include "Vector3.hpp"
+
 #endif

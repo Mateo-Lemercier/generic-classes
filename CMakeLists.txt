@@ -11,7 +11,6 @@ set(HEADER_FILES generic-classes.h
 
         src/Math.h
 
-        src/Math/Vectors.h
         src/Math/Vector.hpp
         src/Math/Vector.inl
         src/Math/Vector1.hpp
