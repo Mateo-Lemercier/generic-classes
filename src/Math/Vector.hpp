@@ -5,9 +5,8 @@ namespace Math {
 
 
 template <typename T, unsigned char size>
-class Vector
+struct Vector
 {
-public:
     T values[size] {};
 
     Vector() = default;

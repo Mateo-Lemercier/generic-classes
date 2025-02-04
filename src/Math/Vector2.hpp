@@ -8,9 +8,8 @@ namespace Math {
 
 
 template <typename T>
-class Vector<T, 2>
+struct Vector<T, 2>
 {
-public:
     union {
         T values[2] {};
         struct { T x, y; };
