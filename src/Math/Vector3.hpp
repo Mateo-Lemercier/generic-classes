@@ -72,10 +72,6 @@ public:
 
 #include "Vector3.inl"
 
-typedef Vector<char, 3> Vector3c;
-typedef Vector<int, 3> Vector3i;
-typedef Vector<float, 3> Vector3f;
-typedef Vector<double, 3> Vector3d;
 
 }
 #endif
