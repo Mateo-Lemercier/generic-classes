@@ -46,6 +46,7 @@ Vector2<T>::Vector( Vector const& other ):
 template <typename T>
 Vector2<T>& Vector2<T>::operator=( Vector2<T> const& other )
 {
+    if ( this == &other ) return *this;
     x = other.x;
     y = other.y;
     return *this;
@@ -231,16 +232,16 @@ template <typename T>
 Vector2<T>::operator bool() const { return x != 0 || y != 0; }
 
 template <typename T>
-bool Vector2<T>::operator==( Vector const& other ) const { return x == other.x && y == other.y; }
+bool Vector2<T>::operator==( Vector const& other ) const { return this == &other || ( x == other.x && y == other.y ); }
 
 template <typename T>
-bool Vector2<T>::operator!=( Vector const& other ) const { return x != other.x || y != other.y; }
+bool Vector2<T>::operator!=( Vector const& other ) const { return this != &other && ( x != other.x || y != other.y ); }
 
 template <typename T>
-bool Vector2<T>::operator<=( Vector const& other ) const { return x <= other.x && y <= other.y; }
+bool Vector2<T>::operator<=( Vector const& other ) const { return this == &other || ( x <= other.x && y <= other.y ); }
 
 template <typename T>
-bool Vector2<T>::operator>=( Vector const& other ) const { return x >= other.x && y >= other.y; }
+bool Vector2<T>::operator>=( Vector const& other ) const { return this == &other || ( x >= other.x && y >= other.y ); }
 
 
 

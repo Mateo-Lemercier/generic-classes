@@ -31,6 +31,7 @@ Vector1<T>::Vector( Vector const& other ):
 template <typename T>
 Vector1<T>& Vector1<T>::operator=( Vector const& other )
 {
+    if ( this == &other ) return *this;
     x = other.x;
     return *this;
 }
@@ -192,16 +193,16 @@ template <typename T>
 Vector1<T>::operator bool() const { return x != 0; }
 
 template <typename T>
-bool Vector1<T>::operator==( Vector const& other ) const { return x == other.x; }
+bool Vector1<T>::operator==( Vector const& other ) const { return this == &other || x == other.x; }
 
 template <typename T>
-bool Vector1<T>::operator!=( Vector const& other ) const { return x != other.x; }
+bool Vector1<T>::operator!=( Vector const& other ) const { return this != &other && x != other.x; }
 
 template <typename T>
-bool Vector1<T>::operator<=( Vector const& other ) const { return x <= other.x; }
+bool Vector1<T>::operator<=( Vector const& other ) const { return this == &other || x <= other.x; }
 
 template <typename T>
-bool Vector1<T>::operator>=( Vector const& other ) const { return x >= other.x; }
+bool Vector1<T>::operator>=( Vector const& other ) const { return this == &other || x >= other.x; }
 
 
 
