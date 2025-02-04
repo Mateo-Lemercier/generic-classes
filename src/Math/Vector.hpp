@@ -12,6 +12,8 @@ public:
 
     Vector() = default;
     Vector( T const (&&values)[size] );
+
+    static_assert(size != 0, "Vector0 doesn't exist");
 };
 
 
