@@ -69,10 +69,10 @@ struct Vector<T, 3>
 
 
 
-#include "Vector3.inl"
-
 template <typename T>
 using Vector3 = Vector<T, 3>;
+
+#include "Vector3.inl"
 
 }
 #endif
