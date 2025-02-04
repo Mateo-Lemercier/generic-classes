@@ -11,7 +11,10 @@ template <typename T>
 class Vector<T, 3>
 {
 public:
-    T x, y, z;
+    union {
+        T values[3] {};
+        struct { T x, y, z; };
+    };
 
     static Vector const Zero;
     static Vector const One;
