@@ -70,6 +70,8 @@ public:
 
 #include "Vector2.inl"
 
+template <typename T>
+using Vector2 = Vector<T, 2>;
 
 }
 #endif

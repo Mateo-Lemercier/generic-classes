@@ -65,5 +65,8 @@ public:
 
 #include "Vector1.inl"
 
+template <typename T>
+using Vector1 = Vector<T, 1>;
+
 }
 #endif
