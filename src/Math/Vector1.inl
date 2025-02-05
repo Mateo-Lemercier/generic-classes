@@ -1,37 +1,37 @@
 #ifndef MATH_VECTOR1_INL_INCLUDED
 #define MATH_VECTOR1_INL_INCLUDED
-#define VECTOR1 Vector<T, 1>
 
 
 
 template <typename T>
-VECTOR1 const VECTOR1::Zero = VECTOR1( 0 );
+Vector1<T> const Vector1<T>::Zero = Vector( 0 );
 
 template <typename T>
-VECTOR1 const VECTOR1::One = VECTOR1( 1 );
+Vector1<T> const Vector1<T>::One = Vector( 1 );
 
 
 
 template <typename T>
-VECTOR1::Vector( T const x ):
+Vector1<T>::Vector( T const x ):
     x( x )
 {}
 
 template <typename T>
-VECTOR1::Vector( T const (&&values)[1] ):
+Vector1<T>::Vector( T const (&&values)[1] ):
     x( values[0] )
 {}
 
 template <typename T>
-VECTOR1::Vector( Vector const& other ):
+Vector1<T>::Vector( Vector const& other ):
     x( other.x )
 {}
 
 
 
 template <typename T>
-VECTOR1& VECTOR1::operator=( Vector const& other )
+Vector1<T>& Vector1<T>::operator=( Vector const& other )
 {
+    if ( this == &other ) return *this;
     x = other.x;
     return *this;
 }
@@ -39,24 +39,24 @@ VECTOR1& VECTOR1::operator=( Vector const& other )
 
 
 template <typename T>
-T VECTOR1::Norm() const { return x; }
+T Vector1<T>::Norm() const { return x; }
 
 template <typename T>
-T VECTOR1::NormSquared() const { return x * x; }
+T Vector1<T>::NormSquared() const { return x * x; }
 
 template <typename T>
-T VECTOR1::Dot( VECTOR1 const& other ) const { return x * other.x; }
+T Vector1<T>::Dot( Vector const& other ) const { return x * other.x; }
 
 template <typename T>
-T VECTOR1::DistanceTo( Vector const& other ) const { return ( other - *this ).Norm(); }
+T Vector1<T>::DistanceTo( Vector const& other ) const { return ( other - *this ).Norm(); }
 
 template <typename T>
-T VECTOR1::DistanceToSquared( Vector const& other ) const { return ( other - *this ).NormSquared(); }
+T Vector1<T>::DistanceToSquared( Vector const& other ) const { return ( other - *this ).NormSquared(); }
 
 
 
 template <typename T>
-VECTOR1 VECTOR1::Normalize() const
+Vector1<T> Vector1<T>::Normalize() const
 {
     T const norm = Norm();
     assert( norm != 0 )
@@ -64,14 +64,14 @@ VECTOR1 VECTOR1::Normalize() const
 }
 
 template <typename T>
-VECTOR1 VECTOR1::Clamp( Vector const& min, Vector const& max ) const
+Vector1<T> Vector1<T>::Clamp( Vector const& min, Vector const& max ) const
 {
     assert( min.x <= max.x )
     return Vector( ( x < min.x ) ? min.x : ( ( x > max.x ) ? max.x : x ) );
 }
 
 template <typename T>
-VECTOR1 VECTOR1::Clamp( T const min, T const max ) const
+Vector1<T> Vector1<T>::Clamp( T const min, T const max ) const
 {
     assert( min <= max )
     return Vector( ( x < min ) ? min : ( ( x > max ) ? max : x ) );
@@ -80,16 +80,16 @@ VECTOR1 VECTOR1::Clamp( T const min, T const max ) const
 
 
 template <typename T>
-VECTOR1& VECTOR1::SelfNormalize()
+Vector1<T>& Vector1<T>::SelfNormalize()
 {
     T const norm = Norm();
-    if ( norm == 0 ) return *this;
+    assert( norm != 0 )
     x /= norm;
     return *this;
 }
 
 template <typename T>
-VECTOR1& VECTOR1::SelfClamp( Vector const& min, Vector const& max )
+Vector1<T>& Vector1<T>::SelfClamp( Vector const& min, Vector const& max )
 {
     assert( min.x <= max.x )
 
@@ -100,7 +100,7 @@ VECTOR1& VECTOR1::SelfClamp( Vector const& min, Vector const& max )
 }
 
 template <typename T>
-VECTOR1& VECTOR1::SelfClamp( T const min, T const max )
+Vector1<T>& Vector1<T>::SelfClamp( T const min, T const max )
 {
     assert( min <= max )
 
@@ -113,59 +113,59 @@ VECTOR1& VECTOR1::SelfClamp( T const min, T const max )
 
 
 template <typename T>
-VECTOR1 VECTOR1::operator+( Vector const& other ) const { return Vector( x + other.x ); }
+Vector1<T> Vector1<T>::operator+( Vector const& other ) const { return Vector( x + other.x ); }
 
 template <typename T>
-VECTOR1 VECTOR1::operator-( Vector const& other ) const { return Vector( x - other.x ); }
+Vector1<T> Vector1<T>::operator-( Vector const& other ) const { return Vector( x - other.x ); }
 
 template <typename T>
-VECTOR1 VECTOR1::operator*( Vector const& other ) const { return Vector( x * other.x ); }
+Vector1<T> Vector1<T>::operator*( Vector const& other ) const { return Vector( x * other.x ); }
 
 template <typename T>
-VECTOR1 VECTOR1::operator/( Vector const& other ) const
+Vector1<T> Vector1<T>::operator/( Vector const& other ) const
 {
     assert( other.x != 0 )
     return Vector( x / other.x );
 }
 
 template <typename T>
-VECTOR1 VECTOR1::operator*( T const scalar ) const { return Vector( x * scalar ); }
+Vector1<T> Vector1<T>::operator*( T const scalar ) const { return Vector( x * scalar ); }
 
 template <typename T>
-VECTOR1 VECTOR1::operator/( T const scalar ) const
+Vector1<T> Vector1<T>::operator/( T const scalar ) const
 {
     assert( scalar != 0 )
     return Vector( x / scalar );
 }
 
 template <typename T>
-VECTOR1 VECTOR1::operator-() const { return Vector( -x ); }
+Vector1<T> Vector1<T>::operator-() const { return Vector( -x ); }
 
 
 
 template <typename T>
-VECTOR1& VECTOR1::operator+=( Vector const& other )
+Vector1<T>& Vector1<T>::operator+=( Vector const& other )
 {
     x += other.x;
     return *this;
 }
 
 template <typename T>
-VECTOR1& VECTOR1::operator-=( Vector const& other )
+Vector1<T>& Vector1<T>::operator-=( Vector const& other )
 {
     x -= other.x;
     return *this;
 }
 
 template <typename T>
-VECTOR1& VECTOR1::operator*=( Vector const& other )
+Vector1<T>& Vector1<T>::operator*=( Vector const& other )
 {
     x *= other.x;
     return *this;
 }
 
 template <typename T>
-VECTOR1& VECTOR1::operator/=( Vector const& other )
+Vector1<T>& Vector1<T>::operator/=( Vector const& other )
 {
     assert( other.x != 0 && other.y != 0 )
     x /= other.x;
@@ -173,14 +173,14 @@ VECTOR1& VECTOR1::operator/=( Vector const& other )
 }
 
 template <typename T>
-VECTOR1& VECTOR1::operator*=( T const scalar )
+Vector1<T>& Vector1<T>::operator*=( T const scalar )
 {
     x *= scalar;
     return *this;
 }
 
 template <typename T>
-VECTOR1& VECTOR1::operator/=( T const scalar )
+Vector1<T>& Vector1<T>::operator/=( T const scalar )
 {
     assert( scalar != 0 )
     x /= scalar;
@@ -190,21 +190,20 @@ VECTOR1& VECTOR1::operator/=( T const scalar )
 
 
 template <typename T>
-VECTOR1::operator bool() const { return x != 0; }
+Vector1<T>::operator bool() const { return x != 0; }
 
 template <typename T>
-bool VECTOR1::operator==( Vector const& other ) const { return x == other.x; }
+bool Vector1<T>::operator==( Vector const& other ) const { return this == &other || x == other.x; }
 
 template <typename T>
-bool VECTOR1::operator!=( Vector const& other ) const { return x != other.x; }
+bool Vector1<T>::operator!=( Vector const& other ) const { return this != &other && x != other.x; }
 
 template <typename T>
-bool VECTOR1::operator<=( Vector const& other ) const { return x <= other.x; }
+bool Vector1<T>::operator<=( Vector const& other ) const { return this == &other || x <= other.x; }
 
 template <typename T>
-bool VECTOR1::operator>=( Vector const& other ) const { return x >= other.x; }
+bool Vector1<T>::operator>=( Vector const& other ) const { return this == &other || x >= other.x; }
 
 
 
-#undef VECTOR1
 #endif

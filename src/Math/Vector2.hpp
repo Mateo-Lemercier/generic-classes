@@ -8,10 +8,12 @@ namespace Math {
 
 
 template <typename T>
-class Vector<T, 2>
+struct Vector<T, 2>
 {
-public:
-    T x, y;
+    union {
+        T values[2] {};
+        struct { T x, y; };
+    };
 
     static Vector const Zero;
     static Vector const One;
@@ -65,12 +67,10 @@ public:
 
 
 
-#include "Vector2.inl"
+template <typename T>
+using Vector2 = Vector<T, 2>;
 
-typedef Vector<char, 2> Vector2c;
-typedef Vector<int, 2> Vector2i;
-typedef Vector<float, 2> Vector2f;
-typedef Vector<double, 2> Vector2d;
+#include "Vector2.inl"
 
 }
 #endif

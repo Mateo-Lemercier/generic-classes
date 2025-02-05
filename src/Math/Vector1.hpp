@@ -7,10 +7,12 @@ namespace Math {
 
 
 template <typename T>
-class Vector<T, 1>
+struct Vector<T, 1>
 {
-public:
-    T x;
+    union {
+        T values[1] {};
+        T x;
+    };
 
     static Vector const Zero;
     static Vector const One;
@@ -59,6 +61,9 @@ public:
 };
 
 
+
+template <typename T>
+using Vector1 = Vector<T, 1>;
 
 #include "Vector1.inl"
 

@@ -1,51 +1,50 @@
 #ifndef MATH_VECTOR3_INL_INCLUDED
 #define MATH_VECTOR3_INL_INCLUDED
-#define VECTOR3 Vector<T, 3>
 
 
 
 template <typename T>
-VECTOR3 const VECTOR3::Zero = VECTOR3( 0, 0, 0 );
+Vector3<T> const Vector3<T>::Zero = Vector( 0, 0, 0 );
 
 template <typename T>
-VECTOR3 const VECTOR3::One = VECTOR3( 1, 1, 1 );
+Vector3<T> const Vector3<T>::One = Vector( 1, 1, 1 );
 
 template <typename T>
-VECTOR3 const VECTOR3::Up = VECTOR3( 0, 1, 0 );
+Vector3<T> const Vector3<T>::Up = Vector( 0, 1, 0 );
 
 template <typename T>
-VECTOR3 const VECTOR3::Left = VECTOR3( -1, 0, 0 );
+Vector3<T> const Vector3<T>::Left = Vector( -1, 0, 0 );
 
 template <typename T>
-VECTOR3 const VECTOR3::Down = VECTOR3( 0, -1, 0 );
+Vector3<T> const Vector3<T>::Down = Vector( 0, -1, 0 );
 
 template <typename T>
-VECTOR3 const VECTOR3::Right = VECTOR3( 1, 0, 0 );
+Vector3<T> const Vector3<T>::Right = Vector( 1, 0, 0 );
 
 template <typename T>
-VECTOR3 const VECTOR3::Forward = VECTOR3( 0, 0, 1 );
+Vector3<T> const Vector3<T>::Forward = Vector( 0, 0, 1 );
 
 template <typename T>
-VECTOR3 const VECTOR3::Back = VECTOR3( 0, 0, -1 );
+Vector3<T> const Vector3<T>::Back = Vector( 0, 0, -1 );
 
 
 
 template <typename T>
-VECTOR3::Vector( T const x, T const y, T const z ):
+Vector3<T>::Vector( T const x, T const y, T const z ):
     x( x ),
     y( y ),
     z( z )
 {}
 
 template <typename T>
-VECTOR3::Vector( T const (&&values)[3] ):
+Vector3<T>::Vector( T const (&&values)[3] ):
     x( values[0] ),
     y( values[1] ),
     z( values[2] )
 {}
 
 template <typename T>
-VECTOR3::Vector( Vector const& other ):
+Vector3<T>::Vector( Vector const& other ):
     x( other.x ),
     y( other.y ),
     z( other.z )
@@ -54,8 +53,9 @@ VECTOR3::Vector( Vector const& other ):
 
 
 template <typename T>
-VECTOR3& VECTOR3::operator=( Vector const& other )
+Vector3<T>& Vector3<T>::operator=( Vector const& other )
 {
+    if ( this == &other ) return *this;
     x = other.x;
     y = other.y;
     z = other.z;
@@ -65,24 +65,24 @@ VECTOR3& VECTOR3::operator=( Vector const& other )
 
 
 template <typename T>
-T VECTOR3::Norm() const { return std::sqrt( x * x + y * y + z * z ); }
+T Vector3<T>::Norm() const { return std::sqrt( x * x + y * y + z * z ); }
 
 template <typename T>
-T VECTOR3::NormSquared() const { return x * x + y * y + z * z; }
+T Vector3<T>::NormSquared() const { return x * x + y * y + z * z; }
 
 template <typename T>
-T VECTOR3::Dot( Vector const& other ) const { return x * other.x + y * other.y + z * other.z; }
+T Vector3<T>::Dot( Vector const& other ) const { return x * other.x + y * other.y + z * other.z; }
 
 template <typename T>
-T VECTOR3::DistanceTo( Vector const& other ) const { return ( other - *this ).Norm(); }
+T Vector3<T>::DistanceTo( Vector const& other ) const { return ( other - *this ).Norm(); }
 
 template <typename T>
-T VECTOR3::DistanceToSquared( Vector const& other ) const { return ( other - *this ).NormSquared(); }
+T Vector3<T>::DistanceToSquared( Vector const& other ) const { return ( other - *this ).NormSquared(); }
 
 
 
 template <typename T>
-VECTOR3 VECTOR3::Normalize() const
+Vector3<T> Vector3<T>::Normalize() const
 {
     T const norm = Norm();
     assert( norm != 0 )
@@ -91,7 +91,7 @@ VECTOR3 VECTOR3::Normalize() const
 }
 
 template <typename T>
-VECTOR3 VECTOR3::Clamp( Vector const& min, Vector const& max ) const
+Vector3<T> Vector3<T>::Clamp( Vector const& min, Vector const& max ) const
 {
     assert( min.x <= max.x && min.y <= max.y && min.z <= max.z )
     return Vector(
@@ -102,7 +102,7 @@ VECTOR3 VECTOR3::Clamp( Vector const& min, Vector const& max ) const
 }
 
 template <typename T>
-VECTOR3 VECTOR3::Clamp( T const min, T const max ) const
+Vector3<T> Vector3<T>::Clamp( T const min, T const max ) const
 {
     assert( min <= max )
     return Vector(
@@ -115,10 +115,10 @@ VECTOR3 VECTOR3::Clamp( T const min, T const max ) const
 
 
 template <typename T>
-VECTOR3& VECTOR3::SelfNormalize()
+Vector3<T>& Vector3<T>::SelfNormalize()
 {
     T const norm = Norm();
-    if ( norm == 0 ) return *this;
+    assert( norm != 0 )
     T const invNorm = 1 / norm;
     x *= invNorm;
     y *= invNorm;
@@ -127,7 +127,7 @@ VECTOR3& VECTOR3::SelfNormalize()
 }
 
 template <typename T>
-VECTOR3& VECTOR3::SelfClamp( Vector const& min, Vector const& max )
+Vector3<T>& Vector3<T>::SelfClamp( Vector const& min, Vector const& max )
 {
     assert( min.x <= max.x && min.y <= max.y && min.z <= max.z )
 
@@ -144,7 +144,7 @@ VECTOR3& VECTOR3::SelfClamp( Vector const& min, Vector const& max )
 }
 
 template <typename T>
-VECTOR3& VECTOR3::SelfClamp( T const min, T const max )
+Vector3<T>& Vector3<T>::SelfClamp( T const min, T const max )
 {
     assert( min <= max )
 
@@ -163,26 +163,26 @@ VECTOR3& VECTOR3::SelfClamp( T const min, T const max )
 
 
 template <typename T>
-VECTOR3 VECTOR3::operator+( Vector const& other ) const { return Vector( x + other.x, y + other.y, z + other.z ); }
+Vector3<T> Vector3<T>::operator+( Vector const& other ) const { return Vector( x + other.x, y + other.y, z + other.z ); }
 
 template <typename T>
-VECTOR3 VECTOR3::operator-( Vector const& other ) const { return Vector( x - other.x, y - other.y, z - other.z ); }
+Vector3<T> Vector3<T>::operator-( Vector const& other ) const { return Vector( x - other.x, y - other.y, z - other.z ); }
 
 template <typename T>
-VECTOR3 VECTOR3::operator*( Vector const& other ) const { return Vector( x * other.x, y * other.y, z * other.z ); }
+Vector3<T> Vector3<T>::operator*( Vector const& other ) const { return Vector( x * other.x, y * other.y, z * other.z ); }
 
 template <typename T>
-VECTOR3 VECTOR3::operator/( Vector const& other ) const
+Vector3<T> Vector3<T>::operator/( Vector const& other ) const
 {
     assert( other.x != 0 && other.y != 0 && other.z != 0 )
     return Vector( x / other.x, y / other.y, z / other.z );
 }
 
 template <typename T>
-VECTOR3 VECTOR3::operator*( T const scalar ) const { return Vector( x * scalar, y * scalar, z * scalar ); }
+Vector3<T> Vector3<T>::operator*( T const scalar ) const { return Vector( x * scalar, y * scalar, z * scalar ); }
 
 template <typename T>
-VECTOR3 VECTOR3::operator/( T const scalar ) const
+Vector3<T> Vector3<T>::operator/( T const scalar ) const
 {
     assert( scalar != 0 )
     T const invScalar = 1 / scalar;
@@ -190,12 +190,12 @@ VECTOR3 VECTOR3::operator/( T const scalar ) const
 }
 
 template <typename T>
-VECTOR3 VECTOR3::operator-() const { return Vector( -x, -y, -z ); }
+Vector3<T> Vector3<T>::operator-() const { return Vector( -x, -y, -z ); }
 
 
 
 template <typename T>
-VECTOR3& VECTOR3::operator+=( Vector const& other )
+Vector3<T>& Vector3<T>::operator+=( Vector const& other )
 {
     x += other.x;
     y += other.y;
@@ -204,7 +204,7 @@ VECTOR3& VECTOR3::operator+=( Vector const& other )
 }
 
 template <typename T>
-VECTOR3& VECTOR3::operator-=( Vector const& other )
+Vector3<T>& Vector3<T>::operator-=( Vector const& other )
 {
     x -= other.x;
     y -= other.y;
@@ -213,7 +213,7 @@ VECTOR3& VECTOR3::operator-=( Vector const& other )
 }
 
 template <typename T>
-VECTOR3& VECTOR3::operator*=( Vector const& other )
+Vector3<T>& Vector3<T>::operator*=( Vector const& other )
 {
     x *= other.x;
     y *= other.y;
@@ -222,7 +222,7 @@ VECTOR3& VECTOR3::operator*=( Vector const& other )
 }
 
 template <typename T>
-VECTOR3& VECTOR3::operator/=( Vector const& other )
+Vector3<T>& Vector3<T>::operator/=( Vector const& other )
 {
     assert( other.x != 0 && other.y != 0 && other.z != 0 )
     x /= other.x;
@@ -232,7 +232,7 @@ VECTOR3& VECTOR3::operator/=( Vector const& other )
 }
 
 template <typename T>
-VECTOR3& VECTOR3::operator*=( T const scalar )
+Vector3<T>& Vector3<T>::operator*=( T const scalar )
 {
     x *= scalar;
     y *= scalar;
@@ -241,7 +241,7 @@ VECTOR3& VECTOR3::operator*=( T const scalar )
 }
 
 template <typename T>
-VECTOR3& VECTOR3::operator/=( T const scalar )
+Vector3<T>& Vector3<T>::operator/=( T const scalar )
 {
     assert( scalar != 0 )
     T const invScalar = 1 / scalar;
@@ -254,21 +254,20 @@ VECTOR3& VECTOR3::operator/=( T const scalar )
 
 
 template <typename T>
-VECTOR3::operator bool() const { return x != 0 || y != 0 || z != 0; }
+Vector3<T>::operator bool() const { return x != 0 || y != 0 || z != 0; }
 
 template <typename T>
-bool VECTOR3::operator==( Vector const& other ) const { return x == other.x && y == other.y && z == other.z; }
+bool Vector3<T>::operator==( Vector const& other ) const { return this == &other || ( x == other.x && y == other.y && z == other.z ); }
 
 template <typename T>
-bool VECTOR3::operator!=( Vector const& other ) const { return x != other.x || y != other.y || z != other.z; }
+bool Vector3<T>::operator!=( Vector const& other ) const { return this != &other && ( x != other.x || y != other.y || z != other.z ); }
 
 template <typename T>
-bool VECTOR3::operator<=( Vector const& other ) const { return x <= other.x && y <= other.y && z <= other.z; }
+bool Vector3<T>::operator<=( Vector const& other ) const { return this == &other || ( x <= other.x && y <= other.y && z <= other.z ); }
 
 template <typename T>
-bool VECTOR3::operator>=( Vector const& other ) const { return x >= other.x && y >= other.y && z >= other.z; }
+bool Vector3<T>::operator>=( Vector const& other ) const { return this == &other || ( x >= other.x && y >= other.y && z >= other.z ); }
 
 
 
-#undef VECTOR3
 #endif
