@@ -83,7 +83,7 @@ template <typename T>
 Vector1<T>& Vector1<T>::SelfNormalize()
 {
     T const norm = Norm();
-    if ( norm == 0 ) return *this;
+    assert( norm != 0 )
     x /= norm;
     return *this;
 }

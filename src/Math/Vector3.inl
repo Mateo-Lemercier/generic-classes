@@ -118,7 +118,7 @@ template <typename T>
 Vector3<T>& Vector3<T>::SelfNormalize()
 {
     T const norm = Norm();
-    if ( norm == 0 ) return *this;
+    assert( norm != 0 )
     T const invNorm = 1 / norm;
     x *= invNorm;
     y *= invNorm;
