@@ -1,62 +1,61 @@
 #ifndef CONTAINER_ARRAY_INL_INCLUDED
 #define CONTAINER_ARRAY_INL_INCLUDED
-#define ARRAY Array<T, size>
 
 
 
-template <typename T, unsigned int size>
-ARRAY::Array( T const (&&values)[size] )
+template <typename T, uint32 size>
+Array<T, size>::Array( T const (&&values)[size] )
 {
-    for ( unsigned int i = 0; i < size; i++ )
+    for ( uint32 i = 0; i < size; i++ )
         m_values[i] = values[i];
 }
 
-template <typename T, unsigned int size>
-ARRAY::Array( Array const& other )
+template <typename T, uint32 size>
+Array<T, size>::Array( Array const& other )
 {
-    for ( unsigned int i = 0; i < size; i++ )
+    for ( uint32 i = 0; i < size; i++ )
         m_values[i] = other.m_values[i];
 }
 
 
 
-template <typename T, unsigned int size>
-ARRAY& ARRAY::operator=( Array const& other )
+template <typename T, uint32 size>
+Array<T, size>& Array<T, size>::operator=( Array const& other )
 {
-    for ( unsigned int i = 0; i < size; i++ )
+    for ( uint32 i = 0; i < size; i++ )
         m_values[i] = other.m_values[i];
 }
 
-template <typename T, unsigned int size>
-void ARRAY::Fill( T const& value )
+template <typename T, uint32 size>
+void Array<T, size>::Fill( T const& value )
 {
-    for ( unsigned int i = 0; i < size; i++ )
+    for ( uint32 i = 0; i < size; i++ )
         m_values[i] = value;
 }
 
 
 
-template <typename T, unsigned int size>
-unsigned int ARRAY::Size() const { return size; }
+template <typename T, uint32 size>
+uint32 Array<T, size>::Size() const { return size; }
 
 
 
-template <typename T, unsigned int size>
-T& ARRAY::Front() { return m_values[0]; }
+template <typename T, uint32 size>
+T& Array<T, size>::Front() { return m_values[0]; }
 
-template <typename T, unsigned int size>
-T& ARRAY::Back() { return m_values[size-1]; }
+template <typename T, uint32 size>
+T& Array<T, size>::Back() { return m_values[size-1]; }
 
-template <typename T, unsigned int size>
-T const& ARRAY::Front() const { return m_values[0]; }
+template <typename T, uint32 size>
+T const& Array<T, size>::Front() const { return m_values[0]; }
 
-template <typename T, unsigned int size>
-T const& ARRAY::Back() const { return m_values[size-1]; }
+template <typename T, uint32 size>
+T const& Array<T, size>::Back() const { return m_values[size-1]; }
 
 
 
-template <typename T, unsigned int size>
-void ARRAY::Swap( unsigned int const index1, unsigned int const index2 )
+template <typename T, uint32 size>
+void Array<T, size>::Swap( uint32 const index1, uint32 const index2 )
 {
     assert( index1 < size && index2 < size )
     T const temp = m_values[ index1 ];
@@ -66,15 +65,15 @@ void ARRAY::Swap( unsigned int const index1, unsigned int const index2 )
 
 
 
-template <typename T, unsigned int size>
-T& ARRAY::operator[]( unsigned int const index )
+template <typename T, uint32 size>
+T& Array<T, size>::operator[]( uint32 const index )
 {
     assert( index < size )
     return m_values[index];
 }
 
-template <typename T, unsigned int size>
-T const& ARRAY::operator[]( unsigned int const index ) const
+template <typename T, uint32 size>
+T const& Array<T, size>::operator[]( uint32 const index ) const
 {
     assert( index < size )
     return m_values[index];
@@ -82,5 +81,4 @@ T const& ARRAY::operator[]( unsigned int const index ) const
 
 
 
-#undef ARRAY
 #endif

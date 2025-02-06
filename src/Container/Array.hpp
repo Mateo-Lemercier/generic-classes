@@ -5,7 +5,7 @@ namespace Container {
 
 
 
-template <typename T, unsigned int size>
+template <typename T, uint32 size>
 class Array
 {
 public:
@@ -16,17 +16,17 @@ public:
     Array& operator=( Array const& other );
     void Fill( T const& value );
 
-    [[nodiscard]] unsigned int Size() const;
+    [[nodiscard]] uint32 Size() const;
 
     T& Front();
     T& Back();
     [[nodiscard]] T const& Front() const;
     [[nodiscard]] T const& Back() const;
 
-    void Swap( unsigned int index1, unsigned int index2 );
+    void Swap( uint32 index1, uint32 index2 );
 
-    T& operator[]( unsigned int index );
-    [[nodiscard]] T const& operator[]( unsigned int index ) const;
+    T& operator[]( uint32 index );
+    [[nodiscard]] T const& operator[]( uint32 index ) const;
 
 private:
     T m_values[size] {};
