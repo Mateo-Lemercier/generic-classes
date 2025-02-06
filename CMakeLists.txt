@@ -25,6 +25,10 @@ set(HEADER_FILES generic-classes.h
         src/Math/Matrix.inl
         src/Math/SquareMatrix.hpp
         src/Math/SquareMatrix.inl
+        src/Math/Matrix1x1.hpp
+        src/Math/Matrix1x1.inl
+        src/Math/Matrix2x2.hpp
+        src/Math/Matrix2x2.inl
 )
 
 set(SOURCE_FILES generic-classes.cpp
