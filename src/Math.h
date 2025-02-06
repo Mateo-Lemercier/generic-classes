@@ -3,6 +3,7 @@
 
 
 #include "Math/Vector.hpp"
+#include "Math/Matrix.hpp"
 
 
 #endif

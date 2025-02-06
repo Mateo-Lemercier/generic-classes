@@ -21,6 +21,8 @@ set(HEADER_FILES generic-classes.h
         src/Math/Vector3.inl
         src/Math/Color.h
         src/Math/Color.inl
+        src/Math/Matrix.hpp
+        src/Math/Matrix.inl
 )
 
 set(SOURCE_FILES generic-classes.cpp
