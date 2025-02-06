@@ -23,6 +23,8 @@ set(HEADER_FILES generic-classes.h
         src/Math/Color.inl
         src/Math/Matrix.hpp
         src/Math/Matrix.inl
+        src/Math/SquareMatrix.hpp
+        src/Math/SquareMatrix.inl
 )
 
 set(SOURCE_FILES generic-classes.cpp
