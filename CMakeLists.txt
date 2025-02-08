@@ -31,6 +31,8 @@ set(HEADER_FILES generic-classes.h
         src/Math/Matrix2x2.inl
         src/Math/Matrix3x3.hpp
         src/Math/Matrix3x3.inl
+        src/Math/Matrix4x4.hpp
+        src/Math/Matrix4x4.inl
 )
 
 set(SOURCE_FILES generic-classes.cpp
