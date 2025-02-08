@@ -91,7 +91,7 @@ Matrix<rows, columns> Matrix<rows, columns>::SwapColumn( uint8 const first, uint
 
 
 template <uint8 rows, uint8 columns>
-void Matrix<rows, columns>::SelfSwapRow( uint8 const first, uint8 const second )
+Matrix<rows, columns>& Matrix<rows, columns>::SelfSwapRow( uint8 const first, uint8 const second )
 {
     for ( uint8 j = 0; j < columns; ++j )
     {
@@ -99,10 +99,11 @@ void Matrix<rows, columns>::SelfSwapRow( uint8 const first, uint8 const second )
         values[first][j] = values[second][j];
         values[second][j] = temp;
     }
+    return *this;
 }
 
 template <uint8 rows, uint8 columns>
-void Matrix<rows, columns>::SelfSwapColumn( uint8 const first, uint8 const second )
+Matrix<rows, columns>& Matrix<rows, columns>::SelfSwapColumn( uint8 const first, uint8 const second )
 {
     for ( uint8 i = 0; i < rows; ++i )
     {
@@ -110,6 +111,7 @@ void Matrix<rows, columns>::SelfSwapColumn( uint8 const first, uint8 const secon
         values[i][first] = values[i][second];
         values[i][second] = temp;
     }
+    return *this;
 }
 
 

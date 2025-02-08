@@ -23,8 +23,8 @@ struct Matrix
     [[nodiscard]] Matrix SwapRow( uint8 first, uint8 second ) const;
     [[nodiscard]] Matrix SwapColumn( uint8 first, uint8 second ) const;
 
-    void SelfSwapRow( uint8 first, uint8 second );
-    void SelfSwapColumn( uint8 first, uint8 second );
+    Matrix& SelfSwapRow( uint8 first, uint8 second );
+    Matrix& SelfSwapColumn( uint8 first, uint8 second );
 
     [[nodiscard]] bool IsNull() const;
     [[nodiscard]] bool IsIdentity() const;
