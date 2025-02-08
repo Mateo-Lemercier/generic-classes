@@ -41,7 +41,7 @@ Matrix2x2& Matrix2x2::operator=( Matrix const& other )
 
 float32 Matrix2x2::Determinant() const { return _11 * _22 - _12 * _21; }
 
-float32 Matrix2x2::Minor( uint8 row, uint8 column ) const { return values[1 - row][1 - column]; }
+float32 Matrix2x2::Minor( uint8 const row, uint8 const column ) const { return values[1-row][1-column]; }
 
 Matrix2x2 Matrix2x2::CoFactor() const
 {
