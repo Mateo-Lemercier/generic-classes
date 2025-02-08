@@ -59,14 +59,14 @@ Matrix1x1 Matrix2x2::SubMatrix( uint8 const row, uint8 const column ) const { re
 
 Matrix2x2 Matrix2x2::SwapRow( uint8 const first, uint8 const second ) const
 {
-    assert( 0 <= first && first < 2 && 0 <= second & second < 2 && first != second )
+    assert( ( first == 0 || first == 1 ) && ( second == 0 || second == 1 ) && ( first != second ) )
     return Matrix( { _21, _22 },
                    { _11, _12 } );
 }
 
 Matrix2x2 Matrix2x2::SwapColumn( uint8 const first, uint8 const second ) const
 {
-    assert( 0 <= first && first < 2 && 0 <= second & second < 2 && first != second )
+    assert( ( first == 0 || first == 1 ) && ( second == 0 || second == 1 ) && ( first != second ) )
     return Matrix( { _12, _11 },
                    { _22, _21 } );
 }
@@ -106,7 +106,7 @@ Matrix2x2& Matrix2x2::SelfTranspose()
 
 Matrix2x2& Matrix2x2::SelfSwapRow( uint8 const first, uint8 const second )
 {
-    assert( 0 <= first && first < 2 && 0 <= second & second < 2 && first != second )
+    assert( ( first == 0 || first == 1 ) && ( second == 0 || second == 1 ) && ( first != second ) )
     float32 temp = _11;
     _11 = _21;
     _21 = temp;
@@ -118,7 +118,7 @@ Matrix2x2& Matrix2x2::SelfSwapRow( uint8 const first, uint8 const second )
 
 Matrix2x2& Matrix2x2::SelfSwapColumn( uint8 const first, uint8 const second )
 {
-    assert( 0 <= first && first < 2 && 0 <= second & second < 2 && first != second )
+    assert( ( first == 0 || first == 1 ) && ( second == 0 || second == 1 ) && ( first != second ) )
     float32 temp = _11;
     _11 = _12;
     _12 = temp;
