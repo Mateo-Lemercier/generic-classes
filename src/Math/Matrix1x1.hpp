@@ -19,7 +19,7 @@ struct Matrix<1, 1>
 
     Matrix() = default;
     explicit Matrix( float32 value );
-    Matrix( float32 const (&&value)[1][1] );
+    Matrix( float32 const (&&table)[1][1] );
 
     Matrix( Matrix const& other );
     Matrix& operator=( Matrix const& other );

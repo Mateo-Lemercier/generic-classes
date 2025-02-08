@@ -11,8 +11,8 @@ struct Matrix<2, 2>
 {
     union {
         struct {
-            float32 _11; float32 _12;
-            float32 _21; float32 _22;
+            float32 _11, _12;
+            float32 _21, _22;
         };
         float32 values[2][2] {};
     };

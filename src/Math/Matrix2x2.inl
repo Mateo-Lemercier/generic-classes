@@ -55,16 +55,16 @@ Matrix2x2 Matrix2x2::Transpose() const
                    { _12, _22 } );
 }
 
-Matrix1x1 Matrix2x2::SubMatrix( uint8 row, uint8 column ) const { return Matrix1x1( values[1 - row][1 - column] ); }
+Matrix1x1 Matrix2x2::SubMatrix( uint8 const row, uint8 const column ) const { return Matrix1x1( values[1-row][1-column] ); }
 
-Matrix2x2 Matrix2x2::SwapRow( uint8 first, uint8 second ) const
+Matrix2x2 Matrix2x2::SwapRow( uint8 const first, uint8 const second ) const
 {
     assert( 0 <= first && first < 2 && 0 <= second & second < 2 && first != second )
     return Matrix( { _21, _22 },
                    { _11, _12 } );
 }
 
-Matrix2x2 Matrix2x2::SwapColumn( uint8 first, uint8 second ) const
+Matrix2x2 Matrix2x2::SwapColumn( uint8 const first, uint8 const second ) const
 {
     assert( 0 <= first && first < 2 && 0 <= second & second < 2 && first != second )
     return Matrix( { _12, _11 },
@@ -104,7 +104,7 @@ Matrix2x2& Matrix2x2::SelfTranspose()
     return *this;
 }
 
-Matrix2x2& Matrix2x2::SelfSwapRow( uint8 first, uint8 second )
+Matrix2x2& Matrix2x2::SelfSwapRow( uint8 const first, uint8 const second )
 {
     assert( 0 <= first && first < 2 && 0 <= second & second < 2 && first != second )
     float32 temp = _11;
@@ -116,7 +116,7 @@ Matrix2x2& Matrix2x2::SelfSwapRow( uint8 first, uint8 second )
     return *this;
 }
 
-Matrix2x2& Matrix2x2::SelfSwapColumn( uint8 first, uint8 second )
+Matrix2x2& Matrix2x2::SelfSwapColumn( uint8 const first, uint8 const second )
 {
     assert( 0 <= first && first < 2 && 0 <= second & second < 2 && first != second )
     float32 temp = _11;
@@ -143,9 +143,17 @@ Matrix2x2& Matrix2x2::SelfInverse()
 
 
 
-bool Matrix2x2::IsNull() const {return _11 == 0.0f && _12 == 0.0f && _21 == 0.0f && _22 == 0.0f; }
+bool Matrix2x2::IsNull() const
+{
+    return _11 == 0.0f && _12 == 0.0f &&
+           _21 == 0.0f && _22 == 0.0f;
+}
 
-bool Matrix2x2::IsIdentity() const {return _11 == 1.0f && _12 == 0.0f && _21 == 0.0f && _22 == 1.0f; }
+bool Matrix2x2::IsIdentity() const
+{
+    return _11 == 1.0f && _12 == 0.0f &&
+           _21 == 0.0f && _22 == 1.0f;
+}
 
 bool Matrix2x2::IsSquare() const { return true; }
 
@@ -157,9 +165,17 @@ bool Matrix2x2::IsDiagonal() const { return _12 == 0.0f && _21 == 0.0f; }
 
 bool Matrix2x2::IsTriangular() const { return _12 == 0.0f || _21 == 0.0f; }
 
-bool Matrix2x2::IsUpperTriangular() const { return _21 == 0.0f; }
+bool Matrix2x2::IsUpperTriangular() const
+{
+    return
+           _21 == 0.0f               ;
+}
 
-bool Matrix2x2::IsLowerTriangular() const { return _12 == 0.0f; }
+bool Matrix2x2::IsLowerTriangular() const
+{
+    return                _12 == 0.0f
+                                     ;
+}
 
 
 
@@ -227,11 +243,11 @@ Matrix2x2 Matrix2x2::Power( int8 const power ) const
 
 Matrix2x2& Matrix2x2::operator*=( Matrix const& other )
 {
-    Matrix thisCopy( *this );
-    _11 = thisCopy._11 * other._11 + thisCopy._12 * other._21;
-    _12 = thisCopy._11 * other._11 + thisCopy._12 * other._22;
-    _21 = thisCopy._21 * other._11 + thisCopy._22 * other._21;
-    _22 = thisCopy._21 * other._11 + thisCopy._22 * other._22;
+    Matrix copy( *this );
+    _11 = copy._11 * other._11 + copy._12 * other._21;
+    _12 = copy._11 * other._11 + copy._12 * other._22;
+    _21 = copy._21 * other._11 + copy._22 * other._21;
+    _22 = copy._21 * other._11 + copy._22 * other._22;
     return *this;
 }
 
@@ -282,19 +298,29 @@ Matrix2x2& Matrix2x2::SelfPower( int8 const power )
         return *this;
     }
 
-    Matrix const thisCopy( *this );
+    Matrix const copy( *this );
     operator=( Matrix::Identity );
     for ( uint8 i = 0; i < power; ++i )
-        operator*=( thisCopy );
+        operator*=( copy );
 
     return *this;
 }
 
 
 
-bool Matrix2x2::operator==( Matrix const& other ) const { return &other == this || ( _11 == other._11 && _12 == other._12 && _21 == other._21 && _22 == other._22 ); }
+bool Matrix2x2::operator==( Matrix const& other ) const
+{
+    return &other == this ||
+            ( _11 == other._11 && _12 == other._12 &&
+              _21 == other._21 && _22 == other._22 );
+}
 
-bool Matrix2x2::operator!=( Matrix const& other ) const { return &other != this && ( _11 != other._11 || _12 != other._12 || _21 != other._21 || _22 != other._22 ); }
+bool Matrix2x2::operator!=( Matrix const& other ) const
+{
+    return &other != this &&
+            ( _11 != other._11 || _12 != other._12 ||
+              _21 != other._21 || _22 != other._22 );
+}
 
 template <uint8 otherRows, uint8 otherColumns>
 bool Matrix2x2::operator==( Matrix<otherRows, otherColumns> const& ) const { return false; }

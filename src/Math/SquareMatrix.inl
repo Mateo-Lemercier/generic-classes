@@ -131,12 +131,12 @@ SquareMatrix<size> SquareMatrix<size>::Inverse() const
     float32 const determinant = Determinant();
     assert( determinant != 0.0f )
 
-    Matrix solution( *this );
-    solution.SelfCoFactor();
-    solution.SelfTranspose();
-    solution /= determinant;
+    Matrix result( *this );
+    result.SelfCoFactor();
+    result.SelfTranspose();
+    result /= determinant;
 
-    return solution;
+    return result;
 }
 
 
@@ -144,13 +144,13 @@ SquareMatrix<size> SquareMatrix<size>::Inverse() const
 template <uint8 size>
 SquareMatrix<size>& SquareMatrix<size>::SelfCoFactor()
 {
-    Matrix const thisCopy( *this );
+    Matrix const copy( *this );
     int8 negativeRow = 1;
     for ( uint8 i = 0; i < size; ++i, negativeRow *= -1 )
     {
         int8 negativeColumn = negativeRow;
         for ( uint8 j = 0; j < size; ++j, negativeColumn *= -1 )
-            values[i][j] = negativeColumn * thisCopy.Minor( i, j );
+            values[i][j] = negativeColumn * copy.Minor( i, j );
     }
     return *this;
 }
@@ -397,14 +397,14 @@ SquareMatrix<size> SquareMatrix<size>::Power( int8 const power ) const
 template <uint8 size>
 SquareMatrix<size>& SquareMatrix<size>::operator*=( Matrix const& other )
 {
-    Matrix const thisCopy( *this );
+    Matrix const copy( *this );
     for ( uint8 i = 0; i < size; ++i )
     {
         for ( uint8 j = 0; j < size; ++j )
         {
             values[i][j] = 0.0f;
             for ( uint8 k = 0; k < size; ++k )
-                values[i][j] += thisCopy.values[i][k] * other.values[k][j];
+                values[i][j] += copy.values[i][k] * other.values[k][j];
         }
     }
     return *this;
@@ -458,10 +458,10 @@ SquareMatrix<size>& SquareMatrix<size>::SelfPower( int8 const power )
         return *this;
     }
 
-    Matrix const thisCopy( *this );
+    Matrix const copy( *this );
     operator=( Matrix::Identity );
     for ( uint8 i = 0; i < power; ++i )
-        operator*=( thisCopy );
+        operator*=( copy );
 
     return *this;
 }
