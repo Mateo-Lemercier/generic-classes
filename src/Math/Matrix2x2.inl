@@ -181,8 +181,8 @@ bool Matrix2x2::IsLowerTriangular() const
 
 Matrix2x2 Matrix2x2::operator*( Matrix const& other ) const
 {
-    return Matrix( { _11 * other._11 + _12 * other._21, _11 * other._11 + _12 * other._22 },
-                   { _21 * other._11 + _22 * other._21, _21 * other._11 + _22 * other._22 } );
+    return Matrix( { _11 * other._11 + _12 * other._21, _11 * other._12 + _12 * other._22 },
+                   { _21 * other._11 + _22 * other._21, _21 * other._12 + _22 * other._22 } );
 }
 
 template <uint8 otherColumns>
