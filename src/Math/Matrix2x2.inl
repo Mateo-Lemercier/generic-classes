@@ -161,9 +161,9 @@ bool Matrix2x2::IsSymmetric() const { return _12 == _21; }
 
 bool Matrix2x2::IsOrthogonal() const { return ( _11 == _22 && _12 == -_21 ) || ( _11 == -_22 && _12 == _21 ); }
 
-bool Matrix2x2::IsDiagonal() const { return _12 == 0.0f && _21 == 0.0f; }
+bool Matrix2x2::IsDiagonal() const { return IsUpperTriangular() && IsLowerTriangular(); }
 
-bool Matrix2x2::IsTriangular() const { return _12 == 0.0f || _21 == 0.0f; }
+bool Matrix2x2::IsTriangular() const { return IsUpperTriangular() || IsLowerTriangular(); }
 
 bool Matrix2x2::IsUpperTriangular() const
 {
