@@ -21,7 +21,7 @@ struct Matrix<2, 2>
     static Matrix const Identity;
 
     Matrix() = default;
-    explicit Matrix( float32 const (&row1)[2], float32 const (&row2)[2] );
+    Matrix( float32 const (&&row1)[2], float32 const (&&row2)[2] );
     Matrix( float32 const (&&table)[2][2] );
     Matrix( Matrix const& other );
 

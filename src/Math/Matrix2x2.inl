@@ -11,7 +11,7 @@ Matrix2x2 const Matrix2x2::Identity( { 1.0f, 0.0f },
 
 
 
-Matrix2x2::Matrix( float32 const (&row1)[2], float32 const (&row2)[2] ):
+Matrix2x2::Matrix( float32 const (&&row1)[2], float32 const (&&row2)[2] ):
     _11( row1[0] ), _12( row1[1] ),
     _21( row2[0] ), _22( row2[1] )
 {}
